@@ -1,11 +1,11 @@
 # Sidekit
 
-> A toolkit for running your side-businesses - order, inventory, cost, customer, and finance management for solo founders juggling multiple ventures.
+> Run several side-businesses from one place: orders, inventory, costs, customers, and finances.
 
 [![CI](https://github.com/aneebbaig/sidekit/actions/workflows/ci.yml/badge.svg)](https://github.com/aneebbaig/sidekit/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-Production-grade business management portal for solo founders managing multiple businesses ("hustles"). Each hustle gets its own complete management suite - research notes, cost sheet with live margin calculator, suppliers, inventory, orders, customers, financials, tasks. Plus a consolidated cross-hustle dashboard and a public order tracking page.
+Sidekit is for people running more than one small business at the same time. Each business (a "hustle") gets its own research notes, cost sheet with margin math, suppliers, inventory, orders, customers, finances, and tasks. There's also a dashboard that adds everything up across businesses, and a public page customers can use to track their order.
 
 **Stack:** Next.js 16 (App Router, RSC, Server Actions) · TypeScript 6 strict · Prisma 7 + PostgreSQL · NextAuth v5 · shadcn-style UI on Tailwind v4 · Zustand · React Hook Form + Zod 4 · Recharts 3 · TanStack Table.
 

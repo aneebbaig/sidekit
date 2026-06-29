@@ -1,28 +1,18 @@
-# Security Policy
+# Security
 
-## Supported versions
+Security fixes go to the `main` branch.
 
-Sidekit is under active development. Security fixes are applied to the `main` branch.
+## Reporting a problem
 
-## Reporting a vulnerability
+Do not open a public issue for a security bug. Use [GitHub's private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability) on this repo, or email the maintainer.
 
-Please **do not** open a public issue for security vulnerabilities.
+Include what the bug is, how to reproduce it, and the impact if you know it. I'll reply within a few days, and you'll get credit for the report unless you'd rather stay anonymous.
 
-Instead, report them privately via [GitHub's private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability) on this repository, or email the maintainer.
+## Areas worth a close look
 
-When reporting, please include:
+The app stores logins, money, and customer details, so these matter most:
 
-- A description of the vulnerability and its impact.
-- Steps to reproduce or a proof of concept.
-- Any suggested remediation.
-
-You can expect an initial response within a few days. Once a fix is released, we are happy to credit you unless you prefer to remain anonymous.
-
-## Scope
-
-This project handles authentication, financial records, and customer data. Of particular interest:
-
-- Authentication and session handling (NextAuth credentials flow).
-- Authorization on server actions and the public order API.
-- SQL/ORM injection and data leakage between resources.
-- Secrets handling and environment validation.
+- Login and sessions (the NextAuth credentials flow)
+- Authorization on server actions and the public order API
+- SQL/ORM injection and data leaking between records
+- How secrets and environment variables are handled
