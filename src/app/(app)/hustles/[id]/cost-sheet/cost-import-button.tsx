@@ -21,7 +21,7 @@ const EXAMPLE = [
     amount: 0.1,
     unit: "glove",
     quantity: 2,
-    notes: "Pack of 100 @ $10 — cost per glove = $0.10",
+    notes: "Pack of 100 @ $10 - cost per glove = $0.10",
   },
   {
     name: "Kraft Boxes",

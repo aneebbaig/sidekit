@@ -114,7 +114,7 @@ export function FinancialsBoard({
         header: "Description",
         cell: ({ row }) => (
           <div>
-            <p className="truncate">{row.original.description || "—"}</p>
+            <p className="truncate">{row.original.description || "-"}</p>
             {row.original.reference ? (
               <p className="text-xs text-muted-foreground">Ref: {row.original.reference}</p>
             ) : null}

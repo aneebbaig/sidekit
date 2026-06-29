@@ -92,7 +92,7 @@ export default async function CustomerDetailPage({
             <CardTitle>Notes</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="whitespace-pre-wrap text-sm text-muted-foreground">{customer.notes || "—"}</p>
+            <p className="whitespace-pre-wrap text-sm text-muted-foreground">{customer.notes || "-"}</p>
           </CardContent>
         </Card>
       </div>
@@ -151,7 +151,7 @@ function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex items-start justify-between gap-3">
       <span className="text-xs uppercase tracking-wider text-muted-foreground w-24 shrink-0">{label}</span>
-      <span className="text-right break-words">{value || "—"}</span>
+      <span className="text-right break-words">{value || "-"}</span>
     </div>
   );
 }

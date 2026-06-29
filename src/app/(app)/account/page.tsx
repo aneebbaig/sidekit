@@ -23,7 +23,7 @@ export default async function AccountPage() {
           <CardTitle>Profile</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm">
-          <Row label="Name" value={user.name ?? "—"} />
+          <Row label="Name" value={user.name ?? "-"} />
           <Row label="Email" value={user.email} />
           <Row label="Member since" value={formatDate(user.createdAt)} />
         </CardContent>

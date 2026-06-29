@@ -105,7 +105,7 @@ export function ProductTabs({
 
   return (
     <div className="flex items-center gap-1 flex-wrap border-b border-border pb-3">
-      {/* Shared tab — not sortable */}
+      {/* Shared tab - not sortable */}
       <button
         onClick={() => onTabChange(SHARED_TAB)}
         className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${

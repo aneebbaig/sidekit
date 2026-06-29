@@ -79,7 +79,7 @@ export default async function SupplierDetailPage({
                     {supplier.rating}/5
                   </span>
                 ) : (
-                  "—"
+                  "-"
                 )
               }
             />
@@ -94,7 +94,7 @@ export default async function SupplierDetailPage({
             <CardTitle>Notes</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="whitespace-pre-wrap text-sm text-muted-foreground">{supplier.notes || "—"}</p>
+            <p className="whitespace-pre-wrap text-sm text-muted-foreground">{supplier.notes || "-"}</p>
           </CardContent>
         </Card>
       </div>
@@ -162,7 +162,7 @@ function Row({
             {value}
           </Link>
         ) : (
-          value || "—"
+          value || "-"
         )}
       </span>
     </div>

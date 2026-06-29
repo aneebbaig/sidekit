@@ -160,7 +160,7 @@ export function OrdersBoard({ hustleId, currency, orders }: Props) {
                   <TableCell>
                     <PaymentStatusBadge status={o.paymentStatus} />
                   </TableCell>
-                  <TableCell>{o.dueDate ? formatDate(o.dueDate) : "—"}</TableCell>
+                  <TableCell>{o.dueDate ? formatDate(o.dueDate) : "-"}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex flex-col items-end leading-tight">
                       <Currency value={o.amountPaid} currency={currency} className="text-xs text-muted-foreground" />

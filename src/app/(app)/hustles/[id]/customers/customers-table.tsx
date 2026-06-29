@@ -42,10 +42,10 @@ export function CustomersTable({ hustleId, customers }: Props) {
           </Link>
         ),
       },
-      { accessorKey: "phone", header: "Phone", cell: ({ row }) => row.original.phone || "—" },
-      { accessorKey: "email", header: "Email", cell: ({ row }) => row.original.email || "—" },
-      { accessorKey: "city", header: "City", cell: ({ row }) => row.original.city || "—" },
-      { accessorKey: "source", header: "Source", cell: ({ row }) => row.original.source || "—" },
+      { accessorKey: "phone", header: "Phone", cell: ({ row }) => row.original.phone || "-" },
+      { accessorKey: "email", header: "Email", cell: ({ row }) => row.original.email || "-" },
+      { accessorKey: "city", header: "City", cell: ({ row }) => row.original.city || "-" },
+      { accessorKey: "source", header: "Source", cell: ({ row }) => row.original.source || "-" },
       {
         accessorKey: "orderCount",
         header: "Orders",

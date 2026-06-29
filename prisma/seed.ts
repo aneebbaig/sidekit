@@ -37,7 +37,7 @@ async function main() {
     data: {
       name: "Resin Hustle",
       color: "#6366f1",
-      description: "Custom resin gifts — keepsakes, name plaques, and decor.",
+      description: "Custom resin gifts - keepsakes, name plaques, and decor.",
       currency: "PKR",
       status: "LAUNCHED",
     },
@@ -68,7 +68,7 @@ async function main() {
         hustleId: hustle.id,
         title: "Resin supplier comparison",
         content:
-          "Karachi Crafts Co — fastest delivery, slightly higher price.\nLahore Resin Hub — best price for large orders.\nAvoid Daraz resellers, quality inconsistent.",
+          "Karachi Crafts Co - fastest delivery, slightly higher price.\nLahore Resin Hub - best price for large orders.\nAvoid Daraz resellers, quality inconsistent.",
         category: "SUPPLIER",
         tags: ["raw-material"],
       },

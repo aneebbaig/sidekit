@@ -139,7 +139,7 @@ export function ResearchBoard({ hustleId, notes }: Props) {
       {sorted.length === 0 ? (
         <EmptyState
           title="No notes yet"
-          description="Capture ideas, supplier conversations, market observations — anything you learn."
+          description="Capture ideas, supplier conversations, market observations - anything you learn."
           action={
             <Button
               onClick={() => {

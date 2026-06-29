@@ -229,7 +229,7 @@ export default async function OrderDetailPage({
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Method</span>
-                <span>{order.paymentMethod ? PAYMENT_METHOD_LABELS[order.paymentMethod] : "—"}</span>
+                <span>{order.paymentMethod ? PAYMENT_METHOD_LABELS[order.paymentMethod] : "-"}</span>
               </div>
               <OrderPaymentDialog hustleId={id} orderId={order.id} />
               {order.payments.length > 0 ? (
@@ -261,7 +261,7 @@ export default async function OrderDetailPage({
                   View profile →
                 </Link>
               ) : (
-                <p className="text-xs text-muted-foreground">Ad-hoc — no profile linked.</p>
+                <p className="text-xs text-muted-foreground">Ad-hoc - no profile linked.</p>
               )}
               {order.dueDate ? (
                 <p className="text-xs text-muted-foreground pt-2">

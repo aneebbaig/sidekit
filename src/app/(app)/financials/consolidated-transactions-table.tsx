@@ -56,7 +56,7 @@ export function ConsolidatedTransactionsTable({
       {
         accessorKey: "description",
         header: "Description",
-        cell: ({ row }) => row.original.description || "—",
+        cell: ({ row }) => row.original.description || "-",
       },
       {
         accessorKey: "amount",

@@ -46,6 +46,6 @@ export function formatCurrencyValue(
 }
 
 export function percent(value: number, fractionDigits = 1): string {
-  if (!Number.isFinite(value)) return "—";
+  if (!Number.isFinite(value)) return "-";
   return `${value.toFixed(fractionDigits)}%`;
 }

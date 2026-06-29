@@ -46,7 +46,7 @@ export function HustleFilters() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="newest">Newest first</SelectItem>
-            <SelectItem value="name">Name A–Z</SelectItem>
+            <SelectItem value="name">Name A-Z</SelectItem>
           </SelectContent>
         </Select>
       </div>

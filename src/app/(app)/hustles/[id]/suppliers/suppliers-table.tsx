@@ -46,14 +46,14 @@ export function SuppliersTable({ hustleId, suppliers }: Props) {
           </div>
         ),
       },
-      { accessorKey: "contactName", header: "Contact", cell: ({ row }) => row.original.contactName || "—" },
-      { accessorKey: "phone", header: "Phone", cell: ({ row }) => row.original.phone || "—" },
-      { accessorKey: "city", header: "City", cell: ({ row }) => row.original.city || "—" },
+      { accessorKey: "contactName", header: "Contact", cell: ({ row }) => row.original.contactName || "-" },
+      { accessorKey: "phone", header: "Phone", cell: ({ row }) => row.original.phone || "-" },
+      { accessorKey: "city", header: "City", cell: ({ row }) => row.original.city || "-" },
       {
         accessorKey: "rating",
         header: "Rating",
         cell: ({ row }) => (
-          <span className="font-mono text-xs">{row.original.rating > 0 ? `${row.original.rating}/5` : "—"}</span>
+          <span className="font-mono text-xs">{row.original.rating > 0 ? `${row.original.rating}/5` : "-"}</span>
         ),
       },
     ],

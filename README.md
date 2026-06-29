@@ -1,11 +1,11 @@
 # Sidekit
 
-> A toolkit for running your side-businesses — order, inventory, cost, customer, and finance management for solo founders juggling multiple ventures.
+> A toolkit for running your side-businesses - order, inventory, cost, customer, and finance management for solo founders juggling multiple ventures.
 
 [![CI](https://github.com/aneebbaig/sidekit/actions/workflows/ci.yml/badge.svg)](https://github.com/aneebbaig/sidekit/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-Production-grade business management portal for solo founders managing multiple businesses ("hustles"). Each hustle gets its own complete management suite — research notes, cost sheet with live margin calculator, suppliers, inventory, orders, customers, financials, tasks. Plus a consolidated cross-hustle dashboard and a public order tracking page.
+Production-grade business management portal for solo founders managing multiple businesses ("hustles"). Each hustle gets its own complete management suite - research notes, cost sheet with live margin calculator, suppliers, inventory, orders, customers, financials, tasks. Plus a consolidated cross-hustle dashboard and a public order tracking page.
 
 **Stack:** Next.js 16 (App Router, RSC, Server Actions) · TypeScript 6 strict · Prisma 7 + PostgreSQL · NextAuth v5 · shadcn-style UI on Tailwind v4 · Zustand · React Hook Form + Zod 4 · Recharts 3 · TanStack Table.
 
@@ -16,7 +16,7 @@ Production-grade business management portal for solo founders managing multiple 
 - [Prerequisites](#prerequisites)
 - [Local development setup](#local-development-setup)
 - [Production deployment (Vercel + Neon)](#production-deployment-vercel--neon)
-- [Schema changes — how to apply](#schema-changes--how-to-apply)
+- [Schema changes - how to apply](#schema-changes--how-to-apply)
 - [Project scripts](#project-scripts)
 - [Architecture](#architecture)
 - [Feature map](#feature-map)
@@ -32,8 +32,8 @@ Production-grade business management portal for solo founders managing multiple 
 | ----------- | ------- | ------------------------------------------------------------------ |
 | **Node.js** | ≥ 20    | Tested on Node 22+.                                                |
 | **pnpm**    | ≥ 9     | `npm i -g pnpm`                                                    |
-| **Docker**  | latest  | Optional — used for the local Postgres container.                  |
-| **Git**     | any     | —                                                                  |
+| **Docker**  | latest  | Optional - used for the local Postgres container.                  |
+| **Git**     | any     | -                                                                  |
 | **OpenSSL** | any     | To generate `AUTH_SECRET`. Most systems have it.                   |
 
 ---
@@ -169,11 +169,11 @@ DATABASE_URL_UNPOOLED=$(grep DATABASE_URL_UNPOOLED .env.production.local | cut -
 
 ### 5. Deploy
 
-Push to `main` — Vercel auto-deploys. Visit the URL, go to `/setup` if no account yet.
+Push to `main` - Vercel auto-deploys. Visit the URL, go to `/setup` if no account yet.
 
 ---
 
-## Schema changes — how to apply
+## Schema changes - how to apply
 
 Whenever you add or modify a field in `prisma/schema.prisma`:
 
@@ -243,7 +243,7 @@ pnpm db:seed      # run prisma/seed.ts
 pnpm db:studio    # open Prisma Studio at :5555
 ```
 
-> All `db:*` scripts use `dotenv-cli` to load `.env` automatically — Prisma 7 no longer reads `.env` for CLI commands.
+> All `db:*` scripts use `dotenv-cli` to load `.env` automatically - Prisma 7 no longer reads `.env` for CLI commands.
 
 ---
 
@@ -269,23 +269,23 @@ Prisma          src/lib/prisma.ts
 | `src/components/`   | Reusable UI primitives (`ui/`), shared widgets, charts          |
 | `src/actions/`      | `"use server"` entry points returning `ActionResult<T>`         |
 | `src/services/`     | Business logic, validation, orchestration                       |
-| `src/repositories/` | Prisma queries — **only place that touches the DB**             |
+| `src/repositories/` | Prisma queries - **only place that touches the DB**             |
 | `src/schemas/`      | Zod 4 schemas (single source of truth for shapes)               |
 | `src/lib/`          | `prisma`, `result`, `errors`, `format`, `currency`, `constants` |
 | `src/stores/`       | Zustand UI-only state (sidebar collapse, etc.)                  |
 | `src/auth/`         | NextAuth v5 wiring                                              |
-| `src/generated/`    | Prisma 7 generated client (gitignored — rebuilt on `pnpm build`)|
+| `src/generated/`    | Prisma 7 generated client (gitignored - rebuilt on `pnpm build`)|
 | `prisma.config.ts`  | Prisma 7 datasource config (DB URL for CLI tools)               |
 | `src/proxy.ts`      | Next.js 16 middleware (auth guard, route protection)            |
 
 ### Hard rules
 
 - Strict TypeScript. No `any`, no `as any`.
-- Every server action returns `{ success: true; data: T } | { success: false; error: string }` — never throws to the client.
+- Every server action returns `{ success: true; data: T } | { success: false; error: string }` - never throws to the client.
 - Every form validates via Zod on both client (`zodResolver`) and server (inside the service).
 - All monetary values stored as `Decimal`. Rendered through `<Currency />`.
 - All dates rendered through `formatDate` / `formatDateTime` / `formatRelative`.
-- Mutations call `revalidatePath` inside the action — no client-side cache layer.
+- Mutations call `revalidatePath` inside the action - no client-side cache layer.
 - Constants live in `src/lib/constants.ts`. No magic strings.
 - Repositories never imported outside services/RSC pages. Services never imported outside actions/RSC pages.
 
@@ -319,7 +319,7 @@ Prisma          src/lib/prisma.ts
 
 ## Public API
 
-All public endpoints live under `/api/public/`. No session required — authenticated via `x-api-key` header (except the lookup endpoint).
+All public endpoints live under `/api/public/`. No session required - authenticated via `x-api-key` header (except the lookup endpoint).
 
 Get a hustle's API key from: **Settings → API Key → Generate**.
 
@@ -373,7 +373,7 @@ Show `trackUrl` to the customer after checkout so they can track their order.
 
 ### GET `/api/public/orders/lookup`
 
-Let a customer re-find their tracking link by order number + name. No API key needed — public.
+Let a customer re-find their tracking link by order number + name. No API key needed - public.
 
 **Query params:** `orderNumber=ORD-0001&customerName=Aisha`
 
@@ -392,7 +392,7 @@ Let a customer re-find their tracking link by order number + name. No API key ne
 
 ### Order tracking page
 
-`/track/[orderId]` — public, no auth. Shows live order status with the hustle's brand color and name applied. Includes a **Copy tracking link** button and a **Look up another order** link to `/track`.
+`/track/[orderId]` - public, no auth. Shows live order status with the hustle's brand color and name applied. Includes a **Copy tracking link** button and a **Look up another order** link to `/track`.
 
 **To theme the tracking page for your website:** go to Hustles → [your hustle] → Settings → General → set **Website URL**. The tracking page will then show your brand's color, name, and a back link to your site.
 
@@ -429,7 +429,7 @@ Then redeploy (or it'll auto-recover on the next request).
 Postgres isn't running.
 
 - Local: `docker compose up -d`
-- Production: check the Neon dashboard — the DB may have gone cold. First request wakes it.
+- Production: check the Neon dashboard - the DB may have gone cold. First request wakes it.
 
 ---
 

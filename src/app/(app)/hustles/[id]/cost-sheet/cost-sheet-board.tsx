@@ -388,7 +388,7 @@ export function CostSheetBoard({ hustleId, currency, items, suppliers, products 
       <Card className="xl:col-span-1 self-start sticky top-32">
         <CardHeader>
           <CardTitle>
-            {activeTab === SHARED_TAB ? "Pricing calculator" : `Pricing — ${activeProduct?.name}`}
+            {activeTab === SHARED_TAB ? "Pricing calculator" : `Pricing - ${activeProduct?.name}`}
           </CardTitle>
           <p className="text-xs text-muted-foreground">
             Costs pulled from your cost sheet automatically.
@@ -482,11 +482,11 @@ export function CostSheetBoard({ hustleId, currency, items, suppliers, products 
             <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Goals</p>
             <Row
               label="Units to break even"
-              value={<span className="font-mono">{Number.isFinite(breakEven) ? breakEven.toLocaleString() : "—"}</span>}
+              value={<span className="font-mono">{Number.isFinite(breakEven) ? breakEven.toLocaleString() : "-"}</span>}
             />
             <Row
               label={`Units for ${currency} ${target.toLocaleString()} / mo`}
-              value={<span className="font-mono">{Number.isFinite(unitsForTarget) ? unitsForTarget.toLocaleString() : "—"}</span>}
+              value={<span className="font-mono">{Number.isFinite(unitsForTarget) ? unitsForTarget.toLocaleString() : "-"}</span>}
             />
           </div>
 

@@ -19,7 +19,7 @@ Thanks for your interest in improving Sidekit. This guide covers the workflow an
 
 ## Before you open a pull request
 
-Run the full local gate — CI runs the same checks:
+Run the full local gate - CI runs the same checks:
 
 ```bash
 pnpm lint

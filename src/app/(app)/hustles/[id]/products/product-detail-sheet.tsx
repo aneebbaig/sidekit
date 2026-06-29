@@ -111,7 +111,7 @@ function AddInspirationDialog({
               onChange={(e) => setImageUrl(e.target.value)}
               onBlur={() => { setPreview(imageUrl.trim()); setPreviewError(false); }}
             />
-            <p className="text-[10px] text-muted-foreground">Paste any image URL — Pinterest, Etsy, Google Images, etc.</p>
+            <p className="text-[10px] text-muted-foreground">Paste any image URL - Pinterest, Etsy, Google Images, etc.</p>
           </div>
           {preview && !previewError && (
             <div className="rounded-lg overflow-hidden aspect-video bg-muted">
@@ -124,7 +124,7 @@ function AddInspirationDialog({
             </div>
           )}
           {previewError && (
-            <p className="text-xs text-amber-400">Image couldn&apos;t be previewed — some sites block embedding. It may still display when saved.</p>
+            <p className="text-xs text-amber-400">Image couldn&apos;t be previewed - some sites block embedding. It may still display when saved.</p>
           )}
           <div className="space-y-2">
             <Label>Title (optional)</Label>

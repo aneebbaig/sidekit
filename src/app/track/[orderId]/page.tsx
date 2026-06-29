@@ -9,11 +9,11 @@ const STEPS: OrderStatus[] = ["PENDING", "CONFIRMED", "IN_PRODUCTION", "READY", 
 
 const STEP_META: Record<OrderStatus, { label: string; description: string; Icon: React.ElementType }> = {
   PENDING: { label: "Pending", description: "Awaiting payment confirmation", Icon: Clock },
-  CONFIRMED: { label: "Confirmed", description: "Order confirmed — production starting soon", Icon: CheckCircle2 },
+  CONFIRMED: { label: "Confirmed", description: "Order confirmed - production starting soon", Icon: CheckCircle2 },
   IN_PRODUCTION: { label: "In Production", description: "Your item is being crafted", Icon: Package },
   READY: { label: "Ready", description: "Finished & quality checked", Icon: CheckCircle2 },
   SHIPPED: { label: "Shipped", description: "On its way to you", Icon: Truck },
-  DELIVERED: { label: "Delivered", description: "Delivered — enjoy!", Icon: CheckCircle2 },
+  DELIVERED: { label: "Delivered", description: "Delivered - enjoy!", Icon: CheckCircle2 },
   CANCELLED: { label: "Cancelled", description: "This order has been cancelled", Icon: XCircle },
 };
 
@@ -145,7 +145,7 @@ export default async function TrackOrderPage({ params }: { params: Promise<{ ord
                 <div key={ev.id} className="flex items-start gap-2 text-xs">
                   <span className="text-muted-foreground shrink-0 pt-0.5">{formatDate(ev.createdAt)}</span>
                   <span className="font-medium">{STEP_META[ev.status as OrderStatus]?.label ?? ev.status}</span>
-                  {ev.note && <span className="text-muted-foreground">— {ev.note}</span>}
+                  {ev.note && <span className="text-muted-foreground">- {ev.note}</span>}
                 </div>
               ))}
             </div>
