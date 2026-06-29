@@ -1,0 +1,471 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// =========================================================================
+// AUTH
+// =========================================================================
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// =========================================================================
+// HUSTLES
+// =========================================================================
+
+enum HustleStatus {
+  IDEA
+  RESEARCH
+  BUILDING
+  LAUNCHED
+  PAUSED
+  ARCHIVED
+}
+
+model Hustle {
+  id          String       @id @default(cuid())
+  name        String
+  color       String       @default("#3b82f6")
+  description String?
+  currency    String       @default("PKR")
+  status      HustleStatus @default(IDEA)
+  apiKey      String?      @unique
+  websiteUrl  String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  researchNotes  ResearchNote[]
+  costItems      CostItem[]
+  products       Product[]
+  suppliers      Supplier[]
+  inventoryItems InventoryItem[]
+  orders         Order[]
+  customers      Customer[]
+  transactions   Transaction[]
+  tasks          Task[]
+  activities     ActivityLog[]
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+// =========================================================================
+// RESEARCH NOTES
+// =========================================================================
+
+enum ResearchCategory {
+  PRODUCT
+  MARKET
+  SUPPLIER
+  LEGAL
+  COMPETITOR
+  PRICING
+  CUSTOMER
+  OPERATIONS
+  GENERAL
+}
+
+model ResearchNote {
+  id        String           @id @default(cuid())
+  hustleId  String
+  title     String
+  content   String
+  category  ResearchCategory @default(GENERAL)
+  tags      String[]
+  pinned    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  hustle Hustle @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+
+  @@index([hustleId])
+  @@index([category])
+  @@index([pinned])
+}
+
+// =========================================================================
+// COST SHEET
+// =========================================================================
+
+enum CostCategory {
+  RAW_MATERIAL
+  PACKAGING
+  EQUIPMENT
+  SHIPPING
+  MARKETING
+  PLATFORM_FEE
+  LEGAL
+  MISCELLANEOUS
+}
+
+enum CostType {
+  FIXED
+  VARIABLE
+}
+
+enum ProductStatus {
+  RESEARCH
+  ACTIVE
+  RETIRED
+}
+
+model Product {
+  id             String        @id @default(cuid())
+  hustleId       String
+  name           String
+  description    String?
+  notes          String?
+  status         ProductStatus @default(RESEARCH)
+  coverImageUrl  String?
+  sortOrder      Int           @default(0)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  hustle       Hustle               @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+  costItems    CostItem[]
+  inspirations ProductInspiration[]
+
+  @@index([hustleId])
+}
+
+model ProductInspiration {
+  id        String   @id @default(cuid())
+  productId String
+  imageUrl  String
+  title     String?
+  notes     String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model CostItem {
+  id         String       @id @default(cuid())
+  hustleId   String
+  supplierId String?
+  productId  String?
+  name       String
+  category   CostCategory
+  type       CostType
+  amount     Decimal      @db.Decimal(14, 2)
+  unit       String       @default("unit")
+  quantity   Decimal      @default(1) @db.Decimal(14, 2)
+  notes      String?
+  url        String?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  hustle   Hustle    @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+  supplier Supplier? @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+  product  Product?  @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([hustleId])
+  @@index([supplierId])
+  @@index([productId])
+  @@index([category])
+  @@index([type])
+}
+
+// =========================================================================
+// SUPPLIERS
+// =========================================================================
+
+model Supplier {
+  id          String   @id @default(cuid())
+  hustleId    String
+  name        String
+  contactName String?
+  phone       String?
+  email       String?
+  website     String?
+  city        String?
+  rating      Int      @default(0)
+  preferred   Boolean  @default(false)
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  hustle    Hustle     @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+  costItems CostItem[]
+
+  @@index([hustleId])
+  @@index([preferred])
+}
+
+// =========================================================================
+// INVENTORY
+// =========================================================================
+
+model InventoryItem {
+  id          String   @id @default(cuid())
+  hustleId    String
+  name        String
+  sku         String?
+  unit        String   @default("unit")
+  quantity    Decimal  @default(0) @db.Decimal(14, 2)
+  reorderAt   Decimal  @default(0) @db.Decimal(14, 2)
+  unitCost    Decimal  @default(0) @db.Decimal(14, 2)
+  notes       String?
+  url         String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  hustle      Hustle               @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+  adjustments InventoryAdjustment[]
+
+  @@index([hustleId])
+  @@index([sku])
+}
+
+model InventoryAdjustment {
+  id        String   @id @default(cuid())
+  itemId    String
+  delta     Decimal  @db.Decimal(14, 2)
+  reason    String
+  createdAt DateTime @default(now())
+
+  item InventoryItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@index([itemId])
+}
+
+// =========================================================================
+// CUSTOMERS
+// =========================================================================
+
+model Customer {
+  id          String   @id @default(cuid())
+  hustleId    String
+  name        String
+  phone       String?
+  email       String?
+  city        String?
+  address     String?
+  source      String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  hustle Hustle  @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+  orders Order[]
+
+  @@index([hustleId])
+  @@index([name])
+}
+
+// =========================================================================
+// ORDERS
+// =========================================================================
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  IN_PRODUCTION
+  READY
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PARTIAL
+  PAID
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  CARD
+  EASYPAISA
+  JAZZCASH
+  OTHER
+}
+
+model Order {
+  id              String        @id @default(cuid())
+  hustleId        String
+  customerId      String?
+  orderNumber     String
+  customerName    String
+  status          OrderStatus   @default(PENDING)
+  paymentStatus   PaymentStatus @default(UNPAID)
+  paymentMethod   PaymentMethod?
+  shippingCost    Decimal       @default(0) @db.Decimal(14, 2)
+  discount        Decimal       @default(0) @db.Decimal(14, 2)
+  total           Decimal       @default(0) @db.Decimal(14, 2)
+  amountPaid      Decimal       @default(0) @db.Decimal(14, 2)
+  customizations  Json?
+  notes           String?
+  dueDate         DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  hustle   Hustle              @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+  customer Customer?           @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  items    OrderItem[]
+  events   OrderStatusEvent[]
+  payments OrderPayment[]
+
+  @@unique([hustleId, orderNumber])
+  @@index([hustleId])
+  @@index([customerId])
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([dueDate])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id          String  @id @default(cuid())
+  orderId     String
+  name        String
+  description String?
+  quantity    Int     @default(1)
+  unitPrice   Decimal @db.Decimal(14, 2)
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+model OrderStatusEvent {
+  id        String      @id @default(cuid())
+  orderId   String
+  status    OrderStatus
+  note      String?
+  createdAt DateTime    @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+model OrderPayment {
+  id        String         @id @default(cuid())
+  orderId   String
+  amount    Decimal        @db.Decimal(14, 2)
+  method    PaymentMethod
+  reference String?
+  note      String?
+  createdAt DateTime       @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+// =========================================================================
+// FINANCIALS
+// =========================================================================
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+model Transaction {
+  id          String          @id @default(cuid())
+  hustleId    String
+  type        TransactionType
+  category    String
+  description String?
+  amount      Decimal         @db.Decimal(14, 2)
+  date        DateTime
+  reference   String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  hustle Hustle @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+
+  @@index([hustleId])
+  @@index([type])
+  @@index([date])
+  @@index([category])
+}
+
+// =========================================================================
+// TASKS
+// =========================================================================
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+  CANCELLED
+}
+
+model Task {
+  id          String       @id @default(cuid())
+  hustleId    String
+  title       String
+  description String?
+  priority    TaskPriority @default(MEDIUM)
+  status      TaskStatus   @default(TODO)
+  category    String?
+  dueDate     DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  hustle Hustle @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+
+  @@index([hustleId])
+  @@index([status])
+  @@index([priority])
+  @@index([dueDate])
+}
+
+// =========================================================================
+// ACTIVITY LOG
+// =========================================================================
+
+enum ActivityType {
+  HUSTLE_CREATED
+  HUSTLE_STATUS_CHANGED
+  ORDER_CREATED
+  ORDER_STATUS_CHANGED
+  ORDER_PAYMENT_RECORDED
+  TRANSACTION_RECORDED
+  INVENTORY_ADJUSTED
+  TASK_COMPLETED
+  CUSTOMER_ADDED
+  SUPPLIER_ADDED
+  NOTE_CREATED
+}
+
+model ActivityLog {
+  id        String       @id @default(cuid())
+  hustleId  String
+  type      ActivityType
+  title     String
+  detail    String?
+  refId     String?
+  createdAt DateTime     @default(now())
+
+  hustle Hustle @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+
+  @@index([hustleId])
+  @@index([type])
+  @@index([createdAt])
+}

@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-background: #13131a;
+  --color-foreground: #eeeef2;
+
+  --color-card: #1c1c28;
+  --color-card-foreground: #eeeef2;
+
+  --color-popover: #1f1f2e;
+  --color-popover-foreground: #eeeef2;
+
+  --color-primary: #6366f1;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #24243a;
+  --color-secondary-foreground: #eeeef2;
+
+  --color-muted: #22223a;
+  --color-muted-foreground: #8888aa;
+
+  --color-accent: #26263c;
+  --color-accent-foreground: #eeeef2;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
+
+  --color-border: #2e2e40;
+  --color-input: #2e2e40;
+  --color-ring: #6366f1;
+
+  --color-chart-1: #6366f1;
+  --color-chart-2: #38bdf8;
+  --color-chart-3: #a78bfa;
+  --color-chart-4: #f97316;
+  --color-chart-5: #10b981;
+  --color-chart-6: #ec4899;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+.font-mono,
+[data-money],
+[data-mono] {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #32324a;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #42425a;
+}
+
+@layer utilities {
+  .surface {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .surface-elevated {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+}
+
+input,
+textarea,
+select {
+  font-family: var(--font-sans);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-in {
+  animation: fade-in 0.18s ease-out both;
+}

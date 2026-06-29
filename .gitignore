@@ -1,0 +1,21 @@
+node_modules
+.next
+.env
+.env.local
+.env*.local
+dist
+build
+.DS_Store
+*.log
+.turbo
+coverage
+.vscode
+.idea
+prisma/migrations/dev.db*
+tsconfig.tsbuildinfo
+
+# Prisma generated client
+src/generated/
+
+# Next.js type declarations (auto-generated)
+next-env.d.ts

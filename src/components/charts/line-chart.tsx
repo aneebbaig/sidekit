@@ -1,0 +1,63 @@
+"use client";
+
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { formatCurrencyValue } from "@/lib/currency";
+
+interface SeriesDef {
+  key: string;
+  label: string;
+  color: string;
+}
+
+interface Props {
+  data: Array<Record<string, string | number>>;
+  series: SeriesDef[];
+  currency?: string;
+  xKey?: string;
+  height?: number;
+}
+
+export function MultiLineChart({ data, series, currency = "PKR", xKey = "label", height = 260 }: Props) {
+  return (
+    <div style={{ height }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={data}>
+          <CartesianGrid stroke="#27272a" strokeDasharray="3 3" vertical={false} />
+          <XAxis dataKey={xKey} stroke="#71717a" fontSize={11} tickLine={false} axisLine={false} />
+          <YAxis
+            stroke="#71717a"
+            fontSize={11}
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={(v) => formatCurrencyValue(v, currency, { compact: true })}
+          />
+          <Tooltip
+            contentStyle={{ background: "#111113", border: "1px solid #27272a", borderRadius: 6, fontSize: 12 }}
+            formatter={(value) => typeof value === 'number' ? formatCurrencyValue(value, currency) : String(value ?? '')}
+          />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          {series.map((s) => (
+            <Line
+              key={s.key}
+              type="monotone"
+              dataKey={s.key}
+              name={s.label}
+              stroke={s.color}
+              strokeWidth={2}
+              dot={false}
+            />
+          ))}
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
