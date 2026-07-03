@@ -21,6 +21,7 @@ import {
   createCustomerAction,
   updateCustomerAction,
 } from "@/actions/customer-actions";
+import { AiFillPanel } from "@/components/shared/ai-fill-panel";
 
 export interface CustomerData {
   id: string;
@@ -46,6 +47,7 @@ export function CustomerFormButton({ hustleId, customer, trigger }: Props) {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
     reset,
   } = useForm({
@@ -60,6 +62,10 @@ export function CustomerFormButton({ hustleId, customer, trigger }: Props) {
       notes: customer?.notes ?? "",
     },
   });
+
+  function handleAiExtracted(data: CustomerInput) {
+    reset({ ...getValues(), ...data });
+  }
 
   async function onSubmit(values: CustomerInput) {
     setPending(true);
@@ -90,6 +96,11 @@ export function CustomerFormButton({ hustleId, customer, trigger }: Props) {
           <DialogTitle>{customer ? "Edit customer" : "New customer"}</DialogTitle>
         </DialogHeader>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <AiFillPanel<CustomerInput>
+            entity="customer"
+            onExtracted={handleAiExtracted}
+            placeholder="Paste a contact card or message about this customer"
+          />
           <div className="space-y-2">
             <Label>Name</Label>
             <Input {...register("name")} />

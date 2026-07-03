@@ -13,6 +13,7 @@ const envSchema = z.object({
     .string()
     .optional()
     .transform((v) => v === "true"),
+  AI_ENCRYPTION_KEY: z.string().min(1).optional(),
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
 });
 

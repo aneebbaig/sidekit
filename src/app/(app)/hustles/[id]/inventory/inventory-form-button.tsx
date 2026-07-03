@@ -21,6 +21,7 @@ import {
   createInventoryItemAction,
   updateInventoryItemAction,
 } from "@/actions/inventory-actions";
+import { AiFillPanel } from "@/components/shared/ai-fill-panel";
 
 export interface InventoryItemData {
   id: string;
@@ -47,6 +48,7 @@ export function InventoryFormButton({ hustleId, item, trigger }: Props) {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
     reset,
   } = useForm({
@@ -62,6 +64,10 @@ export function InventoryFormButton({ hustleId, item, trigger }: Props) {
       url: item?.url ?? "",
     },
   });
+
+  function handleAiExtracted(data: InventoryItemInput) {
+    reset({ ...getValues(), ...data });
+  }
 
   async function onSubmit(values: InventoryItemInput) {
     setPending(true);
@@ -92,6 +98,11 @@ export function InventoryFormButton({ hustleId, item, trigger }: Props) {
           <DialogTitle>{item ? "Edit inventory item" : "Add inventory item"}</DialogTitle>
         </DialogHeader>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <AiFillPanel<InventoryItemInput>
+            entity="inventory"
+            onExtracted={handleAiExtracted}
+            placeholder="Paste a packing list line or note, e.g. 'Kraft boxes small, 200 in stock, reorder at 50, cost 12 each'"
+          />
           <div className="space-y-2">
             <Label>Name</Label>
             <Input {...register("name")} />

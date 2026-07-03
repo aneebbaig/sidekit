@@ -2,7 +2,8 @@
 
 import { supplierService } from "@/services/supplier-service";
 import { withAuth, revalidateHustle } from "./_helpers";
-import type { SupplierInput } from "@/schemas/supplier";
+import { supplierSchema, type SupplierInput } from "@/schemas/supplier";
+import { fail, ok } from "@/lib/result";
 
 export async function createSupplierAction(hustleId: string, input: SupplierInput) {
   return withAuth(async () => {
@@ -25,5 +26,20 @@ export async function deleteSupplierAction(hustleId: string, id: string) {
     const res = await supplierService.delete(id);
     if (res.success) revalidateHustle(hustleId, "suppliers");
     return res;
+  });
+}
+
+export async function importSuppliersAction(hustleId: string, raw: unknown[]) {
+  return withAuth(async () => {
+    let count = 0;
+    for (const item of raw) {
+      const parsed = supplierSchema.safeParse(item);
+      if (!parsed.success) return fail(`Invalid supplier: ${parsed.error.issues[0]?.message}`);
+      const res = await supplierService.create(hustleId, parsed.data);
+      if (!res.success) return fail(res.error);
+      count++;
+    }
+    revalidateHustle(hustleId, "suppliers");
+    return ok({ count });
   });
 }

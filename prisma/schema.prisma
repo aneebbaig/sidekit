@@ -11,6 +11,12 @@ datasource db {
 // AUTH
 // =========================================================================
 
+enum AiProvider {
+  OPENAI
+  GEMINI
+  OPENAI_COMPATIBLE
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -18,6 +24,11 @@ model User {
   passwordHash String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  aiProvider        AiProvider?
+  aiApiKeyEncrypted String?
+  aiModel           String?
+  aiBaseUrl         String?
 }
 
 // =========================================================================

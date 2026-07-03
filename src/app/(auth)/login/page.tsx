@@ -9,7 +9,7 @@ export default async function LoginPage() {
   return (
     <div className="space-y-6">
       <div className="text-center space-y-2">
-        <div className="text-3xl font-semibold tracking-tight text-primary">Sidekit</div>
+        <div className="text-3xl font-semibold tracking-tight text-primary">HustleOS</div>
         <p className="text-sm text-muted-foreground">Sign in to your operating system.</p>
       </div>
       <LoginForm />

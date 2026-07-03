@@ -10,6 +10,7 @@ import type { HustleStatus } from "@/generated/prisma/client";
 import { HustleStatusBadge } from "@/components/shared/status-badge";
 import { formatDate } from "@/lib/format";
 import { HustleCreateButton } from "./hustle-create-button";
+import { HustleAiWizardButton } from "./hustle-ai-wizard-button";
 import { HustleFilters } from "./hustle-filters";
 import type { CreatedHustle } from "./hustle-form";
 
@@ -52,7 +53,8 @@ export function HustleList({ initialHustles, statusFilter, sortFilter }: Props) 
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end gap-2">
+        <HustleAiWizardButton onCreated={handleCreated} />
         <HustleCreateButton onCreated={handleCreated} />
       </div>
 

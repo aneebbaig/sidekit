@@ -16,6 +16,6 @@ export const useUiStore = create<UiState>()(
       toggleSidebar: () => set({ sidebarCollapsed: !get().sidebarCollapsed }),
       setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
     }),
-    { name: "sidekit.ui" },
+    { name: "hustleos.ui" },
   ),
 );

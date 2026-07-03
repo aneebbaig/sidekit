@@ -6,7 +6,7 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("🌱 Seeding Sidekit...");
+  console.log("🌱 Seeding HustleOS...");
 
   await prisma.activityLog.deleteMany();
   await prisma.orderPayment.deleteMany();
@@ -26,12 +26,12 @@ async function main() {
 
   await prisma.user.create({
     data: {
-      email: "owner@example.com",
-      name: "Aneeb",
-      passwordHash: await bcrypt.hash("sidekit123", 12),
+      email: "demo@example.com",
+      name: "Demo Owner",
+      passwordHash: await bcrypt.hash("demo12345", 12),
     },
   });
-  console.log("👤 Created owner: owner@example.com / sidekit123");
+  console.log("👤 Created owner: demo@example.com / demo12345");
 
   const hustle = await prisma.hustle.create({
     data: {
@@ -48,9 +48,9 @@ async function main() {
     data: [
       {
         hustleId: hustle.id,
-        title: "Pakistan wedding gifting market sizing",
+        title: "Wedding gifting market sizing",
         content:
-          "~3M weddings/year. Avg gift budget per attendee PKR 2K-5K.\nPrimary buyers: bride's family, close cousins, sisters.\nSeasonal peak: Oct-Mar. Plan inventory ramp 6 weeks ahead.",
+          "Large seasonal market for personalized keepsakes.\nPrimary buyers: close family and friends of the couple.\nSeasonal peak in cooler months. Plan inventory ramp 6 weeks ahead.",
         category: "MARKET",
         tags: ["weddings", "seasonality"],
         pinned: true,
@@ -59,7 +59,7 @@ async function main() {
         hustleId: hustle.id,
         title: "Top resin SKUs by margin",
         content:
-          "Couple name plaques: 65% margin\nQuran ayah blocks: 70% margin\nEmployee award sets: 55% margin (B2B)\nKeychain favors: 40% margin (volume).",
+          "Couple name plaques: 65% margin\nEngraved keepsake blocks: 70% margin\nEmployee award sets: 55% margin (B2B)\nKeychain favors: 40% margin (volume).",
         category: "PRICING",
         tags: ["margin", "skus"],
         pinned: true,
@@ -68,23 +68,23 @@ async function main() {
         hustleId: hustle.id,
         title: "Resin supplier comparison",
         content:
-          "Karachi Crafts Co - fastest delivery, slightly higher price.\nLahore Resin Hub - best price for large orders.\nAvoid Daraz resellers, quality inconsistent.",
+          "Crestline Crafts Supply - fastest delivery, slightly higher price.\nNorthbridge Resin Co - best price for large orders.\nAvoid marketplace resellers, quality inconsistent.",
         category: "SUPPLIER",
         tags: ["raw-material"],
       },
       {
         hustleId: hustle.id,
-        title: "Competitor: ResinByZee on Instagram",
+        title: "Competitor: GlowCraft Studio on Instagram",
         content:
-          "30K followers. Prices: PKR 1500-7000.\nWeakness: 7-10 day turnaround.\nStrength: aesthetic photography.\nOpportunity: faster turnaround + custom calligraphy.",
+          "Sizeable follower base. Mid-to-high price range.\nWeakness: long turnaround.\nStrength: aesthetic photography.\nOpportunity: faster turnaround + custom calligraphy.",
         category: "COMPETITOR",
         tags: ["instagram"],
       },
       {
         hustleId: hustle.id,
-        title: "Pak tax registration thresholds",
+        title: "Sole proprietor tax registration thresholds",
         content:
-          "Sole proprietor under PKR 600K/year exempt.\nIncome tax filing required annually.\nGST registration triggered at PKR 8M turnover.",
+          "Small-business income exempt below the local threshold.\nAnnual filing required regardless.\nRegistration triggered at a higher turnover tier.",
         category: "LEGAL",
         tags: ["tax"],
       },
@@ -92,7 +92,7 @@ async function main() {
         hustleId: hustle.id,
         title: "Customer feedback log",
         content:
-          "Aisha (Lahore): loved finish, packaging could be premium.\nBilal (Karachi): wanted faster delivery.\nDecision: invest in better packaging + same-city express option.",
+          "Repeat customer: loved finish, packaging could be premium.\nAnother customer: wanted faster delivery.\nDecision: invest in better packaging + a faster local shipping option.",
         category: "CUSTOMER",
         tags: ["feedback"],
       },
@@ -100,7 +100,7 @@ async function main() {
         hustleId: hustle.id,
         title: "Curing time optimization",
         content:
-          "Reduced from 36h to 22h by using fast-cure resin in summer.\nMonitor bubble formation in humid days.",
+          "Reduced cure time significantly by using fast-cure resin in warmer weather.\nMonitor bubble formation in humid conditions.",
         category: "OPERATIONS",
         tags: ["production"],
       },
@@ -111,12 +111,12 @@ async function main() {
   const karachi = await prisma.supplier.create({
     data: {
       hustleId: hustle.id,
-      name: "Karachi Crafts Co",
-      contactName: "Ahmed Raza",
-      phone: "+92 300 1234567",
-      email: "orders@karachicrafts.pk",
-      website: "https://karachicrafts.pk",
-      city: "Karachi",
+      name: "Crestline Crafts Supply",
+      contactName: "Sample Contact",
+      phone: "+1 555 0100",
+      email: "orders@example.com",
+      website: "https://example.com",
+      city: "Metro City",
       rating: 5,
       preferred: true,
       notes: "Fast delivery, premium resin. Goto vendor.",
@@ -125,11 +125,11 @@ async function main() {
   const lahore = await prisma.supplier.create({
     data: {
       hustleId: hustle.id,
-      name: "Lahore Resin Hub",
-      contactName: "Sana Iqbal",
-      phone: "+92 333 9876543",
-      email: "hello@lahoreresin.pk",
-      city: "Lahore",
+      name: "Northbridge Resin Co",
+      contactName: "Sample Contact",
+      phone: "+1 555 0101",
+      email: "hello@example.com",
+      city: "Riverside",
       rating: 4,
       preferred: false,
       notes: "Best for bulk. Higher MOQ.",
@@ -610,7 +610,7 @@ async function main() {
       },
       {
         hustleId: hustle.id,
-        title: "Negotiate bulk pricing with Lahore Resin Hub",
+        title: "Negotiate bulk pricing with Northbridge Resin Co",
         priority: "MEDIUM",
         status: "TODO",
         category: "Operations",
@@ -630,7 +630,7 @@ async function main() {
     },
   });
 
-  console.log("✅ Seed complete. Run pnpm dev and sign in with owner@example.com / sidekit123");
+  console.log("✅ Seed complete. Run pnpm dev and sign in with demo@example.com / demo12345");
 }
 
 main()

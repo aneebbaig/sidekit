@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { auth } from "@/auth";
 import { authService } from "@/services/auth-service";
 import { ChangePasswordForm } from "./change-password-form";
+import { AiSettingsCard } from "./ai-settings-card";
 import { formatDate } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -37,6 +38,13 @@ export default async function AccountPage() {
           <ChangePasswordForm />
         </CardContent>
       </Card>
+
+      <AiSettingsCard
+        provider={user.aiProvider}
+        model={user.aiModel}
+        baseUrl={user.aiBaseUrl}
+        hasKey={Boolean(user.aiApiKeyEncrypted)}
+      />
     </div>
   );
 }

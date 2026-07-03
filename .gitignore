@@ -19,3 +19,6 @@ src/generated/
 
 # Next.js type declarations (auto-generated)
 next-env.d.ts
+
+# Local-only notes and AI-tool config - never committed
+CLAUDE.md

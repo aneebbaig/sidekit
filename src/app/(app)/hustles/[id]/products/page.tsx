@@ -4,6 +4,7 @@ import { productService } from "@/services/product-service";
 import type { ProductStatusType } from "@/schemas/product";
 import { ProductGrid } from "./product-grid";
 import { ProductFormButton } from "../cost-sheet/product-form-button";
+import { AiGenerateProductButton } from "./ai-generate-product-button";
 
 export default async function ProductsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -28,7 +29,12 @@ export default async function ProductsPage({ params }: { params: Promise<{ id: s
       <PageHeader
         title="Products"
         description="Manage your product designs, track R&D progress, and build inspiration boards."
-        action={<ProductFormButton hustleId={id} />}
+        action={
+          <div className="flex gap-2">
+            <AiGenerateProductButton hustleId={id} />
+            <ProductFormButton hustleId={id} />
+          </div>
+        }
       />
       <ProductGrid hustleId={id} currency={hustle.currency} products={serialized} />
     </div>

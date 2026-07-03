@@ -59,7 +59,7 @@ export function Sidebar({ user }: SidebarProps) {
         </div>
         {!collapsed ? (
           <div className="flex-1 truncate">
-            <p className="text-sm font-semibold tracking-tight">Sidekit</p>
+            <p className="text-sm font-semibold tracking-tight">HustleOS</p>
             <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Operator</p>
           </div>
         ) : null}

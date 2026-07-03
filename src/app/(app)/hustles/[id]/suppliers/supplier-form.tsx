@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { supplierSchema, type SupplierInput } from "@/schemas/supplier";
 import { createSupplierAction, updateSupplierAction } from "@/actions/supplier-actions";
+import { AiFillPanel } from "@/components/shared/ai-fill-panel";
 
 export interface SupplierData {
   id: string;
@@ -41,6 +42,8 @@ export function SupplierForm({ hustleId, supplier, onDone }: Props) {
     handleSubmit,
     setValue,
     watch,
+    getValues,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(supplierSchema),
@@ -60,6 +63,10 @@ export function SupplierForm({ hustleId, supplier, onDone }: Props) {
   const preferred = watch("preferred");
   const rating = Number(watch("rating") ?? 0);
 
+  function handleAiExtracted(data: SupplierInput) {
+    reset({ ...getValues(), ...data });
+  }
+
   async function onSubmit(values: SupplierInput) {
     setPending(true);
     const res = supplier
@@ -77,6 +84,11 @@ export function SupplierForm({ hustleId, supplier, onDone }: Props) {
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <AiFillPanel<SupplierInput>
+        entity="supplier"
+        onExtracted={handleAiExtracted}
+        placeholder="Paste a WhatsApp message, business card text, or note about this supplier"
+      />
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-2">
           <Label>Name</Label>

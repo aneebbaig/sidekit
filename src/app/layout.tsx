@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sidekit",
+  title: "HustleOS",
   description: "Operating system for solo founders managing multiple businesses.",
   manifest: "/manifest.json",
   icons: {

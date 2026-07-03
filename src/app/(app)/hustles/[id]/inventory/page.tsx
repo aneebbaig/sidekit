@@ -7,6 +7,7 @@ import { toNumber } from "@/lib/currency";
 import { InventoryTable } from "./inventory-table";
 import { InventoryFormButton } from "./inventory-form-button";
 import { InventoryImportButton } from "./inventory-import-button";
+import { AiGenerateInventoryButton } from "./ai-generate-inventory-button";
 
 export default async function InventoryPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -24,6 +25,7 @@ export default async function InventoryPage({ params }: { params: Promise<{ id: 
         description="Raw materials, packaging, and stocked items."
         action={
           <div className="flex gap-2">
+            <AiGenerateInventoryButton hustleId={id} />
             <InventoryImportButton hustleId={id} />
             <InventoryFormButton hustleId={id} />
           </div>

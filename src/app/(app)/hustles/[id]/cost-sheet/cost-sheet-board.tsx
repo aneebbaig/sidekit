@@ -21,6 +21,7 @@ import { COST_CATEGORIES, COST_CATEGORY_LABELS, COST_TYPE_LABELS } from "@/lib/c
 import type { ProductStatusType } from "@/schemas/product";
 import { CostItemFormButton } from "./cost-item-form-button";
 import { CostImportButton } from "./cost-import-button";
+import { AiGenerateCostButton } from "./ai-generate-cost-button";
 import { ProductTabs } from "./product-tabs";
 import { ProductFormButton, type ProductData } from "./product-form-button";
 import { deleteCostItemAction, deleteManyCostItemsAction } from "@/actions/cost-actions";
@@ -222,6 +223,7 @@ export function CostSheetBoard({ hustleId, currency, items, suppliers, products 
             )}
           </div>
           <div className="flex gap-2">
+            <AiGenerateCostButton hustleId={hustleId} />
             <CostImportButton hustleId={hustleId} defaultProductId={activeTab === SHARED_TAB ? "" : activeTab} />
             <CostItemFormButton
               hustleId={hustleId}

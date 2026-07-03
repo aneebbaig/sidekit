@@ -3,6 +3,7 @@ import { hustleService } from "@/services/hustle-service";
 import { supplierService } from "@/services/supplier-service";
 import { SuppliersTable } from "./suppliers-table";
 import { SupplierFormButton } from "./supplier-form-button";
+import { AiGenerateSupplierButton } from "./ai-generate-supplier-button";
 
 export default async function SuppliersPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -15,7 +16,12 @@ export default async function SuppliersPage({ params }: { params: Promise<{ id: 
       <PageHeader
         title="Suppliers"
         description="Vendors, manufacturers, and providers you work with."
-        action={<SupplierFormButton hustleId={id} />}
+        action={
+          <div className="flex gap-2">
+            <AiGenerateSupplierButton hustleId={id} />
+            <SupplierFormButton hustleId={id} />
+          </div>
+        }
       />
       <SuppliersTable
         hustleId={id}

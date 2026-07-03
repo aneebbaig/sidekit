@@ -32,6 +32,7 @@ import {
   COST_TYPE_LABELS,
 } from "@/lib/constants";
 import { createCostItemAction, updateCostItemAction } from "@/actions/cost-actions";
+import { AiFillPanel } from "@/components/shared/ai-fill-panel";
 
 interface ItemData {
   id: string;
@@ -65,6 +66,7 @@ export function CostItemFormButton({ hustleId, suppliers, products, item, trigge
     handleSubmit,
     setValue,
     watch,
+    getValues,
     formState: { errors },
     reset,
   } = useForm({
@@ -87,6 +89,11 @@ export function CostItemFormButton({ hustleId, suppliers, products, item, trigge
   const type = watch("type");
   const supplierId = watch("supplierId");
   const productId = watch("productId");
+
+  function handleAiExtracted(data: CostItemInput) {
+    // Keep the currently-selected supplier/product - AI can't know their real DB ids.
+    reset({ ...getValues(), ...data, supplierId: getValues("supplierId"), productId: getValues("productId") });
+  }
 
   async function onSubmit(values: CostItemInput) {
     setPending(true);
@@ -117,6 +124,11 @@ export function CostItemFormButton({ hustleId, suppliers, products, item, trigge
           <DialogTitle>{item ? "Edit cost item" : "Add cost item"}</DialogTitle>
         </DialogHeader>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <AiFillPanel<CostItemInput>
+            entity="cost"
+            onExtracted={handleAiExtracted}
+            placeholder="Paste an invoice line or supplier message, e.g. 'Bought 2kg epoxy resin from Crestline Crafts at 2200/kg'"
+          />
           <div className="space-y-2">
             <Label>Name</Label>
             <Input {...register("name")} />

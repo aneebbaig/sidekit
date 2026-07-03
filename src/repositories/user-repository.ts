@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import type { AiProvider } from "@/generated/prisma/client";
 
 export const userRepository = {
   async count(): Promise<number> {
@@ -15,5 +16,16 @@ export const userRepository = {
   },
   async updatePassword(id: string, passwordHash: string) {
     return prisma.user.update({ where: { id }, data: { passwordHash } });
+  },
+  async updateAiSettings(
+    id: string,
+    data: {
+      aiProvider: AiProvider;
+      aiApiKeyEncrypted: string;
+      aiModel: string | null;
+      aiBaseUrl: string | null;
+    },
+  ) {
+    return prisma.user.update({ where: { id }, data });
   },
 };
