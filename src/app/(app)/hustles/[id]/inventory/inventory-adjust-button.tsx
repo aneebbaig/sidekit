@@ -68,12 +68,12 @@ export function InventoryAdjustButton({ hustleId, itemId, trigger }: Props) {
           <div className="space-y-2">
             <Label>Delta (use negative for outflow)</Label>
             <Input type="number" step="0.01" {...register("delta")} />
-            {errors.delta ? <p className="text-xs text-rose-300">{errors.delta.message}</p> : null}
+            {errors.delta ? <p className="text-xs text-destructive">{errors.delta.message}</p> : null}
           </div>
           <div className="space-y-2">
             <Label>Reason</Label>
             <Input placeholder="Restock, used in batch, breakage..." {...register("reason")} />
-            {errors.reason ? <p className="text-xs text-rose-300">{errors.reason.message}</p> : null}
+            {errors.reason ? <p className="text-xs text-destructive">{errors.reason.message}</p> : null}
           </div>
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>

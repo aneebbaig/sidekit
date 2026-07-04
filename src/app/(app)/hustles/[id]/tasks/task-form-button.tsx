@@ -107,7 +107,7 @@ export function TaskFormButton({ hustleId, task, trigger }: Props) {
           <div className="space-y-2">
             <Label>Title</Label>
             <Input {...register("title")} />
-            {errors.title ? <p className="text-xs text-rose-300">{errors.title.message}</p> : null}
+            {errors.title ? <p className="text-xs text-destructive">{errors.title.message}</p> : null}
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">

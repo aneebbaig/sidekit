@@ -12,7 +12,7 @@ export default async function SuppliersPage({ params }: { params: Promise<{ id: 
   const suppliers = await supplierService.list(id);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Suppliers"
         description="Vendors, manufacturers, and providers you work with."

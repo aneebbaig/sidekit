@@ -25,7 +25,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ id: s
   }));
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Products"
         description="Manage your product designs, track R&D progress, and build inspiration boards."

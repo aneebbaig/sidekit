@@ -150,7 +150,7 @@ export function OrderForm({ hustleId, customers, order, onDone }: Props) {
           <Label>Customer name (display)</Label>
           <Input {...register("customerName")} />
           {errors.customerName ? (
-            <p className="text-xs text-rose-300">{errors.customerName.message}</p>
+            <p className="text-xs text-destructive">{errors.customerName.message}</p>
           ) : null}
         </div>
       </div>
@@ -195,7 +195,7 @@ export function OrderForm({ hustleId, customers, order, onDone }: Props) {
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="text-rose-300"
+                className="text-destructive"
                 onClick={() => itemsArray.remove(i)}
                 disabled={itemsArray.fields.length <= 1}
               >
@@ -204,7 +204,7 @@ export function OrderForm({ hustleId, customers, order, onDone }: Props) {
             </div>
           ))}
         </div>
-        {errors.items ? <p className="text-xs text-rose-300">{errors.items.message}</p> : null}
+        {errors.items ? <p className="text-xs text-destructive">{errors.items.message}</p> : null}
       </div>
 
       <div className="grid grid-cols-3 gap-3">
@@ -294,7 +294,7 @@ export function OrderForm({ hustleId, customers, order, onDone }: Props) {
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="text-rose-300"
+                className="text-destructive"
                 onClick={() => customsArray.remove(i)}
               >
                 <Trash2 className="h-4 w-4" />

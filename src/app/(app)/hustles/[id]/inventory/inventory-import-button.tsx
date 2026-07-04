@@ -150,9 +150,9 @@ export function InventoryImportButton({ hustleId }: Props) {
               onChange={handleFile}
             />
             {parseError ? (
-              <p className="text-xs text-rose-300">{parseError}</p>
+              <p className="text-xs text-destructive">{parseError}</p>
             ) : parsed ? (
-              <p className="text-xs text-emerald-300">{parsed.length} item{parsed.length === 1 ? "" : "s"} ready to import.</p>
+              <p className="text-xs text-success">{parsed.length} item{parsed.length === 1 ? "" : "s"} ready to import.</p>
             ) : null}
           </div>
 

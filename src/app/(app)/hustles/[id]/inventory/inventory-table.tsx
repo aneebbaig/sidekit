@@ -200,7 +200,7 @@ export function InventoryTable({ hustleId, currency, items }: Props) {
                   onConfirm={() => handleDelete(i.id)}
                   trigger={
                     <DropdownMenuItem
-                      className="text-rose-300 focus:text-rose-200"
+                      className="text-destructive focus:text-destructive"
                       onSelect={(e) => e.preventDefault()}
                     >
                       <Trash2 className="h-4 w-4" /> Delete

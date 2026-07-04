@@ -11,7 +11,7 @@ export default async function TasksPage({ params }: { params: Promise<{ id: stri
   const tasks = await taskService.list(id);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Tasks"
         description="Things to do, ordered by priority and due date."

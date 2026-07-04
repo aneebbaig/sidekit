@@ -74,7 +74,7 @@ export default async function HustleOverviewPage({
   const recentOrders = ordersData.slice(0, 5);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader title="Overview" description={`${hustle.name} • This month performance.`} />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -130,8 +130,8 @@ export default async function HustleOverviewPage({
               data={monthly}
               currency={hustle.currency}
               series={[
-                { key: "income", label: "Income", color: "#10b981" },
-                { key: "expenses", label: "Expenses", color: "#ef4444" },
+                { key: "income", label: "Income", color: "var(--color-success)" },
+                { key: "expenses", label: "Expenses", color: "var(--color-destructive)" },
               ]}
             />
           </CardContent>
@@ -208,7 +208,7 @@ export default async function HustleOverviewPage({
                 {upcomingTasks.map((t) => (
                   <li key={t.id} className="flex items-start gap-2 text-sm">
                     {t.status === "DONE" ? (
-                      <CircleCheckBig className="h-4 w-4 text-emerald-300 mt-0.5" />
+                      <CircleCheckBig className="h-4 w-4 text-success mt-0.5" />
                     ) : (
                       <Calendar className="h-4 w-4 text-muted-foreground mt-0.5" />
                     )}
@@ -229,9 +229,9 @@ export default async function HustleOverviewPage({
       </div>
 
       {lowStock.length > 0 ? (
-        <Card className="border-amber-700/40">
+        <Card className="border-warning/40">
           <CardHeader className="flex flex-row items-center gap-2">
-            <TriangleAlert className="h-4 w-4 text-amber-300" />
+            <TriangleAlert className="h-4 w-4 text-warning" />
             <CardTitle>Low stock alerts</CardTitle>
             <Badge variant="warning">{lowStock.length}</Badge>
           </CardHeader>
@@ -243,7 +243,7 @@ export default async function HustleOverviewPage({
                   className="flex items-center justify-between rounded-md border border-border px-3 py-2 text-sm"
                 >
                   <span className="truncate">{i.name}</span>
-                  <span className="font-mono text-xs text-amber-300">
+                  <span className="font-mono text-xs text-warning">
                     {i.quantity.toString()} {i.unit}
                   </span>
                 </li>

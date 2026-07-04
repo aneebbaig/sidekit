@@ -1,22 +1,24 @@
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PageHeader } from "@/components/shared/page-header";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { authService } from "@/services/auth-service";
 import { ChangePasswordForm } from "./change-password-form";
 import { AiSettingsCard } from "./ai-settings-card";
+import { TotpCard } from "./totp-card";
 import { formatDate } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
 export default async function AccountPage() {
-  const session = await auth();
+  const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user?.id) redirect("/login");
   const user = await authService.getCurrentUser(session.user.id);
   if (!user) redirect("/login");
 
   return (
-    <div className="p-6 space-y-6 max-w-3xl">
+    <div className="p-6 lg:p-8 space-y-6 max-w-3xl">
       <PageHeader title="Account" description="Owner profile and security settings." />
 
       <Card>
@@ -38,6 +40,8 @@ export default async function AccountPage() {
           <ChangePasswordForm />
         </CardContent>
       </Card>
+
+      <TotpCard initialEnabled={user.twoFactorEnabled ?? false} />
 
       <AiSettingsCard
         provider={user.aiProvider}

@@ -125,7 +125,7 @@ export function AiSettingsCard({ provider, model, baseUrl, hasKey }: Props) {
                 {revealKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
             </div>
-            {errors.apiKey ? <p className="text-xs text-rose-300">{errors.apiKey.message}</p> : null}
+            {errors.apiKey ? <p className="text-xs text-destructive">{errors.apiKey.message}</p> : null}
           </div>
 
           <div className="grid grid-cols-2 gap-3">
@@ -138,7 +138,7 @@ export function AiSettingsCard({ provider, model, baseUrl, hasKey }: Props) {
                 <Label>Base URL</Label>
                 <Input placeholder="https://api.example.com/v1" {...register("baseUrl")} />
                 {errors.baseUrl ? (
-                  <p className="text-xs text-rose-300">{errors.baseUrl.message}</p>
+                  <p className="text-xs text-destructive">{errors.baseUrl.message}</p>
                 ) : null}
               </div>
             ) : null}

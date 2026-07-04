@@ -30,7 +30,7 @@ export default async function OrdersPage({ params }: { params: Promise<{ id: str
   }));
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Orders"
         description="Customer orders and their lifecycle."

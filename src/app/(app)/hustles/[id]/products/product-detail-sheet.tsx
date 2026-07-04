@@ -124,7 +124,7 @@ function AddInspirationDialog({
             </div>
           )}
           {previewError && (
-            <p className="text-xs text-amber-400">Image couldn&apos;t be previewed - some sites block embedding. It may still display when saved.</p>
+            <p className="text-xs text-warning">Image couldn&apos;t be previewed - some sites block embedding. It may still display when saved.</p>
           )}
           <div className="space-y-2">
             <Label>Title (optional)</Label>

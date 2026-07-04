@@ -1,6 +1,5 @@
 import { PrismaClient, type Prisma } from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
-import bcrypt from "bcryptjs";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
@@ -22,16 +21,9 @@ async function main() {
   await prisma.task.deleteMany();
   await prisma.researchNote.deleteMany();
   await prisma.hustle.deleteMany();
-  await prisma.user.deleteMany();
 
-  await prisma.user.create({
-    data: {
-      email: "demo@example.com",
-      name: "Demo Owner",
-      passwordHash: await bcrypt.hash("demo12345", 12),
-    },
-  });
-  console.log("👤 Created owner: demo@example.com / demo12345");
+  // No user is seeded: the owner account is created through the /setup flow
+  // (better-auth). This keeps any default/guessable credential out of the repo.
 
   const hustle = await prisma.hustle.create({
     data: {
@@ -630,7 +622,7 @@ async function main() {
     },
   });
 
-  console.log("✅ Seed complete. Run pnpm dev and sign in with demo@example.com / demo12345");
+  console.log("✅ Seed complete. Run pnpm dev, then create the owner account at /setup.");
 }
 
 main()

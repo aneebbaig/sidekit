@@ -29,6 +29,10 @@ export function LoginForm() {
       toast.error(res.error);
       return;
     }
+    if (res.data?.totpRequired) {
+      router.push("/login/2fa");
+      return;
+    }
     router.push("/");
     router.refresh();
   }
@@ -43,7 +47,7 @@ export function LoginForm() {
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" autoComplete="email" {...register("email")} />
-            {errors.email ? <p className="text-xs text-rose-300">{errors.email.message}</p> : null}
+            {errors.email ? <p className="text-xs text-destructive">{errors.email.message}</p> : null}
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
@@ -54,7 +58,7 @@ export function LoginForm() {
               {...register("password")}
             />
             {errors.password ? (
-              <p className="text-xs text-rose-300">{errors.password.message}</p>
+              <p className="text-xs text-destructive">{errors.password.message}</p>
             ) : null}
           </div>
           <Button type="submit" className="w-full" disabled={pending}>

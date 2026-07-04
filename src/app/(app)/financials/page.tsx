@@ -71,7 +71,7 @@ export default async function ConsolidatedFinancialsPage({
   const allTransactions = await transactionService.list({ from, to });
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Consolidated financials"
         description="Combined view across all hustles."
@@ -170,7 +170,7 @@ export default async function ConsolidatedFinancialsPage({
               id: t.id,
               hustleId: t.hustleId,
               hustleName: t.hustle?.name ?? "",
-              hustleColor: t.hustle?.color ?? "#6366f1",
+              hustleColor: t.hustle?.color ?? "#14b8a6",
               currency: t.hustle?.currency ?? "PKR",
               type: t.type,
               category: t.category,

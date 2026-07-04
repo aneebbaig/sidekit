@@ -107,7 +107,7 @@ export function ProductFormButton({ hustleId, item, trigger }: Props) {
           <div className="space-y-2">
             <Label>Product name</Label>
             <Input {...register("name")} placeholder="e.g. Rose Gold Nikkah Plaque" />
-            {errors.name ? <p className="text-xs text-rose-300">{errors.name.message}</p> : null}
+            {errors.name ? <p className="text-xs text-destructive">{errors.name.message}</p> : null}
           </div>
           <div className="space-y-2">
             <Label>Status</Label>
@@ -139,7 +139,7 @@ export function ProductFormButton({ hustleId, item, trigger }: Props) {
             <Label>Cover image URL (optional)</Label>
             <Input type="url" placeholder="https://" {...register("coverImageUrl")} />
             {errors.coverImageUrl ? (
-              <p className="text-xs text-rose-300">{errors.coverImageUrl.message}</p>
+              <p className="text-xs text-destructive">{errors.coverImageUrl.message}</p>
             ) : null}
           </div>
           <div className="space-y-2">

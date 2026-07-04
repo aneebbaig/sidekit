@@ -214,7 +214,7 @@ export function CostSheetBoard({ hustleId, currency, items, suppliers, products 
                   confirmLabel="Delete product"
                   onConfirm={() => handleDeleteProduct(activeProduct.id)}
                   trigger={
-                    <Button variant="ghost" size="sm" className="gap-1 h-7 text-xs text-rose-400 hover:text-rose-300">
+                    <Button variant="ghost" size="sm" className="gap-1 h-7 text-xs text-destructive hover:text-destructive">
                       <Trash2 className="h-3 w-3" /> Delete product
                     </Button>
                   }
@@ -364,7 +364,7 @@ export function CostSheetBoard({ hustleId, currency, items, suppliers, products 
                                     onConfirm={() => handleDelete(i.id)}
                                     trigger={
                                       <DropdownMenuItem
-                                        className="text-rose-300 focus:text-rose-200"
+                                        className="text-destructive focus:text-destructive"
                                         onSelect={(e) => e.preventDefault()}
                                       >
                                         <Trash2 className="h-4 w-4" /> Delete
@@ -457,7 +457,7 @@ export function CostSheetBoard({ hustleId, currency, items, suppliers, products 
               <Row
                 label="Margin"
                 value={
-                  <span className={`font-mono ${grossMargin >= 30 ? "text-emerald-300" : grossMargin >= 10 ? "text-amber-300" : "text-rose-300"}`}>
+                  <span className={`font-mono ${grossMargin >= 30 ? "text-success" : grossMargin >= 10 ? "text-warning" : "text-destructive"}`}>
                     {percent(grossMargin)}
                   </span>
                 }

@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -21,7 +22,6 @@ model User {
   id           String   @id @default(cuid())
   email        String   @unique
   name         String?
-  passwordHash String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -29,6 +29,14 @@ model User {
   aiApiKeyEncrypted String?
   aiModel           String?
   aiBaseUrl         String?
+  emailVerified     Boolean     @default(false)
+  image             String?
+  twoFactorEnabled  Boolean?    @default(false)
+  sessions          Session[]
+  accounts          Account[]
+  twofactors        TwoFactor[]
+
+  @@map("user")
 }
 
 // =========================================================================
@@ -132,16 +140,16 @@ enum ProductStatus {
 }
 
 model Product {
-  id             String        @id @default(cuid())
-  hustleId       String
-  name           String
-  description    String?
-  notes          String?
-  status         ProductStatus @default(RESEARCH)
-  coverImageUrl  String?
-  sortOrder      Int           @default(0)
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  id            String        @id @default(cuid())
+  hustleId      String
+  name          String
+  description   String?
+  notes         String?
+  status        ProductStatus @default(RESEARCH)
+  coverImageUrl String?
+  sortOrder     Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 
   hustle       Hustle               @relation(fields: [hustleId], references: [id], onDelete: Cascade)
   costItems    CostItem[]
@@ -222,20 +230,20 @@ model Supplier {
 // =========================================================================
 
 model InventoryItem {
-  id          String   @id @default(cuid())
-  hustleId    String
-  name        String
-  sku         String?
-  unit        String   @default("unit")
-  quantity    Decimal  @default(0) @db.Decimal(14, 2)
-  reorderAt   Decimal  @default(0) @db.Decimal(14, 2)
-  unitCost    Decimal  @default(0) @db.Decimal(14, 2)
-  notes       String?
-  url         String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  hustleId  String
+  name      String
+  sku       String?
+  unit      String   @default("unit")
+  quantity  Decimal  @default(0) @db.Decimal(14, 2)
+  reorderAt Decimal  @default(0) @db.Decimal(14, 2)
+  unitCost  Decimal  @default(0) @db.Decimal(14, 2)
+  notes     String?
+  url       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  hustle      Hustle               @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+  hustle      Hustle                @relation(fields: [hustleId], references: [id], onDelete: Cascade)
   adjustments InventoryAdjustment[]
 
   @@index([hustleId])
@@ -259,17 +267,17 @@ model InventoryAdjustment {
 // =========================================================================
 
 model Customer {
-  id          String   @id @default(cuid())
-  hustleId    String
-  name        String
-  phone       String?
-  email       String?
-  city        String?
-  address     String?
-  source      String?
-  notes       String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  hustleId  String
+  name      String
+  phone     String?
+  email     String?
+  city      String?
+  address   String?
+  source    String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   hustle Hustle  @relation(fields: [hustleId], references: [id], onDelete: Cascade)
   orders Order[]
@@ -308,26 +316,26 @@ enum PaymentMethod {
 }
 
 model Order {
-  id              String        @id @default(cuid())
-  hustleId        String
-  customerId      String?
-  orderNumber     String
-  customerName    String
-  status          OrderStatus   @default(PENDING)
-  paymentStatus   PaymentStatus @default(UNPAID)
-  paymentMethod   PaymentMethod?
-  shippingCost    Decimal       @default(0) @db.Decimal(14, 2)
-  discount        Decimal       @default(0) @db.Decimal(14, 2)
-  total           Decimal       @default(0) @db.Decimal(14, 2)
-  amountPaid      Decimal       @default(0) @db.Decimal(14, 2)
-  customizations  Json?
-  notes           String?
-  dueDate         DateTime?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  id             String         @id @default(cuid())
+  hustleId       String
+  customerId     String?
+  orderNumber    String
+  customerName   String
+  status         OrderStatus    @default(PENDING)
+  paymentStatus  PaymentStatus  @default(UNPAID)
+  paymentMethod  PaymentMethod?
+  shippingCost   Decimal        @default(0) @db.Decimal(14, 2)
+  discount       Decimal        @default(0) @db.Decimal(14, 2)
+  total          Decimal        @default(0) @db.Decimal(14, 2)
+  amountPaid     Decimal        @default(0) @db.Decimal(14, 2)
+  customizations Json?
+  notes          String?
+  dueDate        DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 
-  hustle   Hustle              @relation(fields: [hustleId], references: [id], onDelete: Cascade)
-  customer Customer?           @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  hustle   Hustle             @relation(fields: [hustleId], references: [id], onDelete: Cascade)
+  customer Customer?          @relation(fields: [customerId], references: [id], onDelete: SetNull)
   items    OrderItem[]
   events   OrderStatusEvent[]
   payments OrderPayment[]
@@ -367,13 +375,13 @@ model OrderStatusEvent {
 }
 
 model OrderPayment {
-  id        String         @id @default(cuid())
+  id        String        @id @default(cuid())
   orderId   String
-  amount    Decimal        @db.Decimal(14, 2)
+  amount    Decimal       @db.Decimal(14, 2)
   method    PaymentMethod
   reference String?
   note      String?
-  createdAt DateTime       @default(now())
+  createdAt DateTime      @default(now())
 
   order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
@@ -479,4 +487,67 @@ model ActivityLog {
   @@index([hustleId])
   @@index([type])
   @@index([createdAt])
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model TwoFactor {
+  id                      String    @id
+  secret                  String
+  backupCodes             String
+  userId                  String
+  user                    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  verified                Boolean?  @default(true)
+  failedVerificationCount Int?      @default(0)
+  lockedUntil             DateTime?
+
+  @@index([secret])
+  @@index([userId])
+  @@map("twoFactor")
 }

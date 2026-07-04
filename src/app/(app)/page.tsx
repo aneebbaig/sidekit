@@ -38,7 +38,7 @@ export default async function DashboardPage() {
   }));
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Operator dashboard"
         description="Cross-hustle financial and operational overview for the current month."

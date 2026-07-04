@@ -64,7 +64,7 @@ export function HustleForm({ hustle, onDone }: Props) {
     resolver: zodResolver(hustleSchema),
     defaultValues: {
       name: hustle?.name ?? "",
-      color: hustle?.color ?? "#6366f1",
+      color: hustle?.color ?? "#14b8a6",
       description: hustle?.description ?? "",
       currency: (hustle?.currency as HustleInput["currency"]) ?? "PKR",
       status: (hustle?.status as HustleInput["status"]) ?? "IDEA",
@@ -108,7 +108,7 @@ export function HustleForm({ hustle, onDone }: Props) {
       <div className="space-y-2">
         <Label htmlFor="name">Name</Label>
         <Input id="name" {...register("name")} />
-        {errors.name ? <p className="text-xs text-rose-300">{errors.name.message}</p> : null}
+        {errors.name ? <p className="text-xs text-destructive">{errors.name.message}</p> : null}
       </div>
       <div className="space-y-2">
         <Label htmlFor="description">Description</Label>
@@ -118,7 +118,7 @@ export function HustleForm({ hustle, onDone }: Props) {
         <Label htmlFor="websiteUrl">Website URL</Label>
         <Input id="websiteUrl" placeholder="https://daastan.pk" {...register("websiteUrl")} />
         {errors.websiteUrl ? (
-          <p className="text-xs text-rose-300">{errors.websiteUrl.message}</p>
+          <p className="text-xs text-destructive">{errors.websiteUrl.message}</p>
         ) : null}
         <p className="text-xs text-muted-foreground">Shown on the order tracking page as a &quot;Back to site&quot; link.</p>
       </div>
@@ -140,7 +140,7 @@ export function HustleForm({ hustle, onDone }: Props) {
             />
           ))}
         </div>
-        {errors.color ? <p className="text-xs text-rose-300">{errors.color.message}</p> : null}
+        {errors.color ? <p className="text-xs text-destructive">{errors.color.message}</p> : null}
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-2">

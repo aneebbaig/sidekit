@@ -23,19 +23,31 @@ interface StatCardProps {
 
 const variantBorder: Record<Variant, string> = {
   default: "border-border",
-  success: "border-emerald-700/50",
-  warning: "border-amber-700/50",
-  danger: "border-rose-700/50",
+  success: "border-success/30",
+  warning: "border-warning/30",
+  danger: "border-destructive/30",
   primary: "border-primary/40",
+};
+
+const variantIconTone: Record<Variant, string> = {
+  default: "bg-muted text-muted-foreground",
+  success: "bg-success/10 text-success",
+  warning: "bg-warning/10 text-warning",
+  danger: "bg-destructive/10 text-destructive",
+  primary: "bg-primary/10 text-primary",
 };
 
 export function StatCard({ label, value, subtext, icon, variant = "default", trend, className }: StatCardProps) {
   return (
     <Card className={cn("relative overflow-hidden", variantBorder[variant], className)}>
-      <CardContent className="p-5">
+      <CardContent className="p-6">
         <div className="flex items-start justify-between gap-2">
           <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</p>
-          {icon ? <div className="text-muted-foreground [&>svg]:h-4 [&>svg]:w-4">{icon}</div> : null}
+          {icon ? (
+            <div className={cn("flex h-7 w-7 items-center justify-center rounded-md [&>svg]:h-4 [&>svg]:w-4", variantIconTone[variant])}>
+              {icon}
+            </div>
+          ) : null}
         </div>
         <div className="mt-3 flex items-baseline gap-2 text-2xl font-mono font-medium tabular-nums">
           {value}
@@ -53,7 +65,7 @@ function TrendBadge({ trend }: { trend: TrendInfo }) {
   const v = trend.value;
   const positive = trend.invert ? v < 0 : v > 0;
   const negative = trend.invert ? v > 0 : v < 0;
-  const tone = positive ? "text-emerald-300" : negative ? "text-rose-300" : "text-muted-foreground";
+  const tone = positive ? "text-success" : negative ? "text-destructive" : "text-muted-foreground";
   const Icon = v > 0 ? ArrowUp : v < 0 ? ArrowDown : Minus;
   const sign = v > 0 ? "+" : "";
   return (
