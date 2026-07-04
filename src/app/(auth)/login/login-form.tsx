@@ -29,6 +29,10 @@ export function LoginForm() {
       toast.error(res.error);
       return;
     }
+    if (res.data?.totpRequired) {
+      router.push("/login/2fa");
+      return;
+    }
     router.push("/");
     router.refresh();
   }

@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { Sidebar } from "@/components/layout/sidebar";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { authService } from "@/services/auth-service";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +11,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   if (await authService.needsSetup()) {
     redirect("/setup");
   }
-  const session = await auth();
+  const session = await auth.api.getSession({ headers: await headers() });
   const user = {
     name: session?.user?.name ?? null,
     email: session?.user?.email ?? null,
