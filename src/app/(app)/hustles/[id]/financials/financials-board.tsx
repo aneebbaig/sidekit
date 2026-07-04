@@ -212,8 +212,8 @@ export function FinancialsBoard({
               data={monthly}
               currency={currency}
               series={[
-                { key: "income", label: "Income", color: "#10b981" },
-                { key: "expenses", label: "Expenses", color: "#ef4444" },
+                { key: "income", label: "Income", color: "var(--color-success)" },
+                { key: "expenses", label: "Expenses", color: "var(--color-destructive)" },
               ]}
             />
           </CardContent>
@@ -296,7 +296,7 @@ export function FinancialsBoard({
                   onConfirm={() => handleDelete(t.id)}
                   trigger={
                     <DropdownMenuItem
-                      className="text-rose-300 focus:text-rose-200"
+                      className="text-destructive focus:text-destructive"
                       onSelect={(e) => e.preventDefault()}
                     >
                       <Trash2 className="h-4 w-4" /> Delete

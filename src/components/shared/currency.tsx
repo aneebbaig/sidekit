@@ -22,16 +22,16 @@ export function Currency({
   const num = toNumber(value);
   const toneClass =
     tone === "positive"
-      ? "text-emerald-300"
+      ? "text-success"
       : tone === "negative"
-      ? "text-rose-300"
+      ? "text-destructive"
       : tone === "muted"
       ? "text-muted-foreground"
       : tone === "auto"
       ? num > 0
-        ? "text-emerald-300"
+        ? "text-success"
         : num < 0
-        ? "text-rose-300"
+        ? "text-destructive"
         : "text-foreground"
       : "text-foreground";
 

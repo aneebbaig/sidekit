@@ -50,7 +50,7 @@ export function ChangePasswordForm() {
           {...register("currentPassword")}
         />
         {errors.currentPassword ? (
-          <p className="text-xs text-rose-300">{errors.currentPassword.message}</p>
+          <p className="text-xs text-destructive">{errors.currentPassword.message}</p>
         ) : null}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -63,7 +63,7 @@ export function ChangePasswordForm() {
             {...register("newPassword")}
           />
           {errors.newPassword ? (
-            <p className="text-xs text-rose-300">{errors.newPassword.message}</p>
+            <p className="text-xs text-destructive">{errors.newPassword.message}</p>
           ) : null}
         </div>
         <div className="space-y-2">
@@ -75,7 +75,7 @@ export function ChangePasswordForm() {
             {...register("confirmPassword")}
           />
           {errors.confirmPassword ? (
-            <p className="text-xs text-rose-300">{errors.confirmPassword.message}</p>
+            <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>
           ) : null}
         </div>
       </div>

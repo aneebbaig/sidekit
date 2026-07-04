@@ -42,9 +42,9 @@ export function DangerZone({ hustleId, hustleName }: Props) {
   }
 
   return (
-    <Card className="border-rose-700/40">
+    <Card className="border-destructive/40">
       <CardHeader className="flex flex-row items-center gap-2">
-        <TriangleAlert className="h-4 w-4 text-rose-300" />
+        <TriangleAlert className="h-4 w-4 text-destructive" />
         <CardTitle>Danger zone</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">

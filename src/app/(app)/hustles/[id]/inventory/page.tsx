@@ -19,7 +19,7 @@ export default async function InventoryPage({ params }: { params: Promise<{ id: 
   ]);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Inventory"
         description="Raw materials, packaging, and stocked items."

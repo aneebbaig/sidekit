@@ -82,7 +82,7 @@ export function OrderPaymentDialog({ hustleId, orderId }: Props) {
             <div className="space-y-2">
               <Label>Amount</Label>
               <Input type="number" step="0.01" {...register("amount")} />
-              {errors.amount ? <p className="text-xs text-rose-300">{errors.amount.message}</p> : null}
+              {errors.amount ? <p className="text-xs text-destructive">{errors.amount.message}</p> : null}
             </div>
             <div className="space-y-2">
               <Label>Method</Label>

@@ -49,25 +49,25 @@ export function SetupForm() {
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
             <Input id="name" {...register("name")} />
-            {errors.name ? <p className="text-xs text-rose-300">{errors.name.message}</p> : null}
+            {errors.name ? <p className="text-xs text-destructive">{errors.name.message}</p> : null}
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" {...register("email")} />
-            {errors.email ? <p className="text-xs text-rose-300">{errors.email.message}</p> : null}
+            {errors.email ? <p className="text-xs text-destructive">{errors.email.message}</p> : null}
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" {...register("password")} />
             {errors.password ? (
-              <p className="text-xs text-rose-300">{errors.password.message}</p>
+              <p className="text-xs text-destructive">{errors.password.message}</p>
             ) : null}
           </div>
           <div className="space-y-2">
             <Label htmlFor="confirmPassword">Confirm password</Label>
             <Input id="confirmPassword" type="password" {...register("confirmPassword")} />
             {errors.confirmPassword ? (
-              <p className="text-xs text-rose-300">{errors.confirmPassword.message}</p>
+              <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>
             ) : null}
           </div>
           <Button type="submit" className="w-full" disabled={pending}>

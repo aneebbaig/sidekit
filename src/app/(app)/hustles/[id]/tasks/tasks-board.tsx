@@ -169,11 +169,11 @@ export function TasksBoard({ hustleId, tasks }: Props) {
                   className={cn(
                     "mt-0.5 h-5 w-5 rounded-md border flex items-center justify-center",
                     t.status === "DONE"
-                      ? "bg-emerald-500/20 border-emerald-700/50"
+                      ? "bg-success/15 border-success/40"
                       : "border-border hover:border-primary",
                   )}
                 >
-                  {t.status === "DONE" ? <Check className="h-3 w-3 text-emerald-300" /> : null}
+                  {t.status === "DONE" ? <Check className="h-3 w-3 text-success" /> : null}
                 </button>
                 <div className="flex-1 min-w-0">
                   <p className={cn("font-medium", t.status === "DONE" && "line-through text-muted-foreground")}>
@@ -190,7 +190,7 @@ export function TasksBoard({ hustleId, tasks }: Props) {
                       <span
                         className={cn(
                           "inline-flex items-center gap-1",
-                          isOverdue(t) ? "text-rose-300" : "",
+                          isOverdue(t) ? "text-destructive" : "",
                         )}
                       >
                         <Clock className="h-3 w-3" />
@@ -238,7 +238,7 @@ export function TasksBoard({ hustleId, tasks }: Props) {
                         <div className="flex items-center justify-between gap-2 text-[10px] text-muted-foreground">
                           <TaskPriorityBadge priority={t.priority} />
                           {t.dueDate ? (
-                            <span className={isOverdue(t) ? "text-rose-300" : ""}>
+                            <span className={isOverdue(t) ? "text-destructive" : ""}>
                               {formatDate(t.dueDate)}
                             </span>
                           ) : null}
@@ -301,7 +301,7 @@ function RowMenu({
           onConfirm={onDelete}
           trigger={
             <DropdownMenuItem
-              className="text-rose-300 focus:text-rose-200"
+              className="text-destructive focus:text-destructive"
               onSelect={(e) => e.preventDefault()}
             >
               <Trash2 className="h-4 w-4" /> Delete

@@ -27,7 +27,7 @@ export default async function TrackOrderPage({ params }: { params: Promise<{ ord
   if (!order) notFound();
 
   const hustle = await hustleRepository.findById(order.hustleId);
-  const brandColor = hustle?.color ?? "#6366f1";
+  const brandColor = hustle?.color ?? "#14b8a6";
   const brandName = hustle?.name ?? "HustleOS";
   const websiteUrl = hustle?.websiteUrl ?? null;
   const brandInitial = brandName.charAt(0).toUpperCase();

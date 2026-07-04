@@ -17,6 +17,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { useUiStore } from "@/stores/ui-store";
 import { cn } from "@/lib/utils";
 import { logoutAction } from "@/actions/auth-actions";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 const NAV = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -49,7 +50,7 @@ export function Sidebar({ user }: SidebarProps) {
     <aside
       className={cn(
         "sticky top-0 z-40 h-screen shrink-0 border-r border-border bg-card/80 backdrop-blur transition-[width] hidden md:flex md:flex-col",
-        collapsed ? "w-[64px]" : "w-[224px]",
+        collapsed ? "w-[64px]" : "w-[256px]",
       )}
     >
       {/* Brand header */}
@@ -119,6 +120,7 @@ export function Sidebar({ user }: SidebarProps) {
                   ) : null}
                 </TooltipContent>
               </Tooltip>
+              <ThemeToggle />
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
@@ -145,6 +147,7 @@ export function Sidebar({ user }: SidebarProps) {
                   <p className="text-[11px] text-muted-foreground truncate leading-tight">{user.email}</p>
                 ) : null}
               </div>
+              <ThemeToggle />
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button

@@ -44,7 +44,7 @@ export default async function FinancialsPage({
   );
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Financials"
         description="Ledger and analytics for this hustle."

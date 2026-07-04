@@ -30,12 +30,12 @@ export const HUSTLE_STATUS_LABELS: Record<HustleStatus, string> = {
 };
 
 export const HUSTLE_STATUS_TONES: Record<HustleStatus, string> = {
-  IDEA: "bg-zinc-700/40 text-zinc-200 border-zinc-600",
-  RESEARCH: "bg-sky-500/15 text-sky-300 border-sky-700/50",
-  BUILDING: "bg-amber-500/15 text-amber-300 border-amber-700/50",
-  LAUNCHED: "bg-emerald-500/15 text-emerald-300 border-emerald-700/50",
-  PAUSED: "bg-orange-500/15 text-orange-300 border-orange-700/50",
-  ARCHIVED: "bg-zinc-800 text-zinc-500 border-zinc-700",
+  IDEA: "bg-zinc-100 text-zinc-600 border-zinc-200 dark:bg-zinc-700/40 dark:text-zinc-200 dark:border-zinc-600",
+  RESEARCH: "bg-sky-100 text-sky-700 border-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:border-sky-700/50",
+  BUILDING: "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:border-amber-700/50",
+  LAUNCHED: "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-700/50",
+  PAUSED: "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-500/15 dark:text-orange-300 dark:border-orange-700/50",
+  ARCHIVED: "bg-zinc-100 text-zinc-400 border-zinc-200 dark:bg-zinc-800 dark:text-zinc-500 dark:border-zinc-700",
 };
 
 export const ORDER_STATUSES: OrderStatus[] = [
@@ -59,13 +59,13 @@ export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
 };
 
 export const ORDER_STATUS_TONES: Record<OrderStatus, string> = {
-  PENDING: "bg-zinc-700/40 text-zinc-200 border-zinc-600",
-  CONFIRMED: "bg-sky-500/15 text-sky-300 border-sky-700/50",
-  IN_PRODUCTION: "bg-amber-500/15 text-amber-300 border-amber-700/50",
-  READY: "bg-violet-500/15 text-violet-300 border-violet-700/50",
-  SHIPPED: "bg-indigo-500/15 text-indigo-300 border-indigo-700/50",
-  DELIVERED: "bg-emerald-500/15 text-emerald-300 border-emerald-700/50",
-  CANCELLED: "bg-rose-500/15 text-rose-300 border-rose-700/50",
+  PENDING: "bg-zinc-100 text-zinc-600 border-zinc-200 dark:bg-zinc-700/40 dark:text-zinc-200 dark:border-zinc-600",
+  CONFIRMED: "bg-sky-100 text-sky-700 border-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:border-sky-700/50",
+  IN_PRODUCTION: "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:border-amber-700/50",
+  READY: "bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-500/15 dark:text-violet-300 dark:border-violet-700/50",
+  SHIPPED: "bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-500/15 dark:text-indigo-300 dark:border-indigo-700/50",
+  DELIVERED: "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-700/50",
+  CANCELLED: "bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-500/15 dark:text-rose-300 dark:border-rose-700/50",
 };
 
 export const PAYMENT_STATUSES: PaymentStatus[] = ["UNPAID", "PARTIAL", "PAID"];
@@ -77,9 +77,9 @@ export const PAYMENT_STATUS_LABELS: Record<PaymentStatus, string> = {
 };
 
 export const PAYMENT_STATUS_TONES: Record<PaymentStatus, string> = {
-  UNPAID: "bg-rose-500/15 text-rose-300 border-rose-700/50",
-  PARTIAL: "bg-amber-500/15 text-amber-300 border-amber-700/50",
-  PAID: "bg-emerald-500/15 text-emerald-300 border-emerald-700/50",
+  UNPAID: "bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-500/15 dark:text-rose-300 dark:border-rose-700/50",
+  PARTIAL: "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:border-amber-700/50",
+  PAID: "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-700/50",
 };
 
 export const PAYMENT_METHODS: PaymentMethod[] = [
@@ -125,15 +125,15 @@ export const RESEARCH_CATEGORY_LABELS: Record<ResearchCategory, string> = {
 };
 
 export const RESEARCH_CATEGORY_TONES: Record<ResearchCategory, string> = {
-  PRODUCT: "bg-violet-500/15 text-violet-300 border-violet-700/50",
-  MARKET: "bg-sky-500/15 text-sky-300 border-sky-700/50",
-  SUPPLIER: "bg-amber-500/15 text-amber-300 border-amber-700/50",
-  LEGAL: "bg-rose-500/15 text-rose-300 border-rose-700/50",
-  COMPETITOR: "bg-orange-500/15 text-orange-300 border-orange-700/50",
-  PRICING: "bg-emerald-500/15 text-emerald-300 border-emerald-700/50",
-  CUSTOMER: "bg-indigo-500/15 text-indigo-300 border-indigo-700/50",
-  OPERATIONS: "bg-teal-500/15 text-teal-300 border-teal-700/50",
-  GENERAL: "bg-zinc-700/40 text-zinc-200 border-zinc-600",
+  PRODUCT: "bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-500/15 dark:text-violet-300 dark:border-violet-700/50",
+  MARKET: "bg-sky-100 text-sky-700 border-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:border-sky-700/50",
+  SUPPLIER: "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:border-amber-700/50",
+  LEGAL: "bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-500/15 dark:text-rose-300 dark:border-rose-700/50",
+  COMPETITOR: "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-500/15 dark:text-orange-300 dark:border-orange-700/50",
+  PRICING: "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-700/50",
+  CUSTOMER: "bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-500/15 dark:text-indigo-300 dark:border-indigo-700/50",
+  OPERATIONS: "bg-teal-100 text-teal-700 border-teal-200 dark:bg-teal-500/15 dark:text-teal-300 dark:border-teal-700/50",
+  GENERAL: "bg-zinc-100 text-zinc-600 border-zinc-200 dark:bg-zinc-700/40 dark:text-zinc-200 dark:border-zinc-600",
 };
 
 export const COST_CATEGORIES: CostCategory[] = [
@@ -175,10 +175,10 @@ export const TASK_PRIORITY_LABELS: Record<TaskPriority, string> = {
 };
 
 export const TASK_PRIORITY_TONES: Record<TaskPriority, string> = {
-  LOW: "bg-zinc-700/40 text-zinc-300 border-zinc-600",
-  MEDIUM: "bg-sky-500/15 text-sky-300 border-sky-700/50",
-  HIGH: "bg-amber-500/15 text-amber-300 border-amber-700/50",
-  CRITICAL: "bg-rose-500/15 text-rose-300 border-rose-700/50",
+  LOW: "bg-zinc-100 text-zinc-600 border-zinc-200 dark:bg-zinc-700/40 dark:text-zinc-300 dark:border-zinc-600",
+  MEDIUM: "bg-sky-100 text-sky-700 border-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:border-sky-700/50",
+  HIGH: "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:border-amber-700/50",
+  CRITICAL: "bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-500/15 dark:text-rose-300 dark:border-rose-700/50",
 };
 
 export const TASK_STATUSES: TaskStatus[] = ["TODO", "IN_PROGRESS", "DONE", "CANCELLED"];
@@ -191,10 +191,10 @@ export const TASK_STATUS_LABELS: Record<TaskStatus, string> = {
 };
 
 export const TASK_STATUS_TONES: Record<TaskStatus, string> = {
-  TODO: "bg-zinc-700/40 text-zinc-300 border-zinc-600",
-  IN_PROGRESS: "bg-amber-500/15 text-amber-300 border-amber-700/50",
-  DONE: "bg-emerald-500/15 text-emerald-300 border-emerald-700/50",
-  CANCELLED: "bg-rose-500/15 text-rose-300 border-rose-700/50",
+  TODO: "bg-zinc-100 text-zinc-600 border-zinc-200 dark:bg-zinc-700/40 dark:text-zinc-300 dark:border-zinc-600",
+  IN_PROGRESS: "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:border-amber-700/50",
+  DONE: "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-700/50",
+  CANCELLED: "bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-500/15 dark:text-rose-300 dark:border-rose-700/50",
 };
 
 export const TRANSACTION_TYPES: TransactionType[] = ["INCOME", "EXPENSE"];

@@ -20,7 +20,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ id: s
   }));
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader title="Research notes" description="A private notebook for everything you learn about this hustle." />
       <ResearchBoard hustleId={id} notes={serialized} />
     </div>

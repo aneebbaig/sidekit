@@ -122,7 +122,7 @@ export function ResearchSheet({ open, onOpenChange, hustleId, note }: Props) {
           <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Input id="title" {...register("title")} />
-            {errors.title ? <p className="text-xs text-rose-300">{errors.title.message}</p> : null}
+            {errors.title ? <p className="text-xs text-destructive">{errors.title.message}</p> : null}
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
@@ -153,7 +153,7 @@ export function ResearchSheet({ open, onOpenChange, hustleId, note }: Props) {
           <div className="space-y-2">
             <Label htmlFor="content">Content</Label>
             <Textarea id="content" rows={12} {...register("content")} />
-            {errors.content ? <p className="text-xs text-rose-300">{errors.content.message}</p> : null}
+            {errors.content ? <p className="text-xs text-destructive">{errors.content.message}</p> : null}
           </div>
           <div className="space-y-2">
             <Label>Tags</Label>
@@ -181,7 +181,7 @@ export function ResearchSheet({ open, onOpenChange, hustleId, note }: Props) {
                     <button
                       type="button"
                       onClick={() => removeTag(t)}
-                      className="hover:text-rose-300"
+                      className="hover:text-destructive"
                     >
                       <X className="h-3 w-3" />
                     </button>

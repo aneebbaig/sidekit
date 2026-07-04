@@ -104,7 +104,7 @@ export function CustomerFormButton({ hustleId, customer, trigger }: Props) {
           <div className="space-y-2">
             <Label>Name</Label>
             <Input {...register("name")} />
-            {errors.name ? <p className="text-xs text-rose-300">{errors.name.message}</p> : null}
+            {errors.name ? <p className="text-xs text-destructive">{errors.name.message}</p> : null}
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
@@ -114,7 +114,7 @@ export function CustomerFormButton({ hustleId, customer, trigger }: Props) {
             <div className="space-y-2">
               <Label>Email</Label>
               <Input type="email" {...register("email")} />
-              {errors.email ? <p className="text-xs text-rose-300">{errors.email.message}</p> : null}
+              {errors.email ? <p className="text-xs text-destructive">{errors.email.message}</p> : null}
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">

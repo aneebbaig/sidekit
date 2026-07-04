@@ -32,7 +32,7 @@ export default async function CostSheetPage({ params }: { params: Promise<{ id: 
   }));
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Cost sheet"
         description="Break down every cost. Then explore margins with the live calculator."

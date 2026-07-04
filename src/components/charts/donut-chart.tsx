@@ -2,8 +2,9 @@
 
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { formatCurrencyValue } from "@/lib/currency";
+import { SERIES_PALETTE } from "./palette";
 
-const PALETTE = ["#c8a560", "#38bdf8", "#a78bfa", "#f97316", "#10b981", "#ec4899", "#f43f5e", "#22d3ee"];
+const PALETTE = SERIES_PALETTE;
 
 interface Props {
   data: Array<{ name: string; value: number }>;
@@ -30,7 +31,15 @@ export function DonutChartCard({ data, currency = "PKR", height = 260 }: Props) 
             ))}
           </Pie>
           <Tooltip
-            contentStyle={{ background: "#111113", border: "1px solid #27272a", borderRadius: 6, fontSize: 12 }}
+            contentStyle={{
+              background: "var(--color-popover)",
+              border: "1px solid var(--color-border)",
+              borderRadius: 6,
+              fontSize: 12,
+              color: "var(--color-popover-foreground)",
+            }}
+            itemStyle={{ color: "var(--color-popover-foreground)" }}
+            labelStyle={{ color: "var(--color-popover-foreground)" }}
             formatter={(value) => typeof value === 'number' ? formatCurrencyValue(value, currency) : String(value ?? '')}
           />
         </PieChart>

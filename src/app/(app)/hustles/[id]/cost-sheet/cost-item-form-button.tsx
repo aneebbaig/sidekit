@@ -132,7 +132,7 @@ export function CostItemFormButton({ hustleId, suppliers, products, item, trigge
           <div className="space-y-2">
             <Label>Name</Label>
             <Input {...register("name")} />
-            {errors.name ? <p className="text-xs text-rose-300">{errors.name.message}</p> : null}
+            {errors.name ? <p className="text-xs text-destructive">{errors.name.message}</p> : null}
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
@@ -230,7 +230,7 @@ export function CostItemFormButton({ hustleId, suppliers, products, item, trigge
           <div className="space-y-2">
             <Label>URL (optional)</Label>
             <Input type="url" placeholder="https://" {...register("url")} />
-            {errors.url ? <p className="text-xs text-rose-300">{errors.url.message}</p> : null}
+            {errors.url ? <p className="text-xs text-destructive">{errors.url.message}</p> : null}
           </div>
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>

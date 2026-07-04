@@ -16,7 +16,7 @@ export default async function HustlesPage({
   const hustles = await hustleService.list();
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 lg:p-8 space-y-6">
       <PageHeader
         title="Hustles"
         description="All businesses you operate."

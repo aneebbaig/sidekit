@@ -5,13 +5,23 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
   type ColumnDef,
   type SortingState,
   type VisibilityState,
 } from "@tanstack/react-table";
-import { Search, SlidersHorizontal, Loader2, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
+import {
+  Search,
+  SlidersHorizontal,
+  Loader2,
+  ArrowUpDown,
+  ArrowUp,
+  ArrowDown,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -39,7 +49,10 @@ interface DataTableProps<TData> {
   empty?: ReactNode;
   rowActions?: (row: TData) => ReactNode;
   className?: string;
+  pageSize?: number;
 }
+
+const PAGE_SIZE_OPTIONS = [10, 25, 50];
 
 export function DataTable<TData>({
   columns,
@@ -50,10 +63,12 @@ export function DataTable<TData>({
   empty,
   rowActions,
   className,
+  pageSize = 10,
 }: DataTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
   const [visibility, setVisibility] = useState<VisibilityState>({});
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize });
 
   const allColumns = useMemo<ColumnDef<TData, unknown>[]>(() => {
     if (!rowActions) return columns;
@@ -72,13 +87,15 @@ export function DataTable<TData>({
   const table = useReactTable({
     data,
     columns: allColumns,
-    state: { sorting, globalFilter, columnVisibility: visibility },
+    state: { sorting, globalFilter, columnVisibility: visibility, pagination },
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
     onColumnVisibilityChange: setVisibility,
+    onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     globalFilterFn: (row, _columnId, filterValue) => {
       const q = String(filterValue ?? "").toLowerCase().trim();
       if (!q) return true;
@@ -103,7 +120,10 @@ export function DataTable<TData>({
           <Input
             placeholder={searchPlaceholder}
             value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value)}
+            onChange={(e) => {
+              setGlobalFilter(e.target.value);
+              setPagination((p) => ({ ...p, pageIndex: 0 }));
+            }}
             className="pl-8"
           />
         </div>
@@ -134,9 +154,9 @@ export function DataTable<TData>({
 
       <div className="rounded-lg border border-border bg-card overflow-hidden">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-muted/40">
             {table.getHeaderGroups().map((hg) => (
-              <TableRow key={hg.id}>
+              <TableRow key={hg.id} className="hover:bg-transparent">
                 {hg.headers.map((h) => {
                   const canSort = h.column.getCanSort();
                   const dir = h.column.getIsSorted();
@@ -197,6 +217,53 @@ export function DataTable<TData>({
           </TableBody>
         </Table>
       </div>
+
+      {table.getRowModel().rows.length > 0 ? (
+        <div className="flex items-center justify-between gap-3 flex-wrap text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <span>Rows per page</span>
+            <select
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => table.setPageSize(Number(e.target.value))}
+              className="h-8 rounded-md border border-border bg-transparent px-2 text-sm"
+            >
+              {PAGE_SIZE_OPTIONS.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>
+              Page {table.getState().pagination.pageIndex + 1} of{" "}
+              {Math.max(1, table.getPageCount())} &middot; {table.getFilteredRowModel().rows.length} rows
+            </span>
+            <div className="flex items-center gap-1">
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                className="h-8 w-8"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                className="h-8 w-8"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

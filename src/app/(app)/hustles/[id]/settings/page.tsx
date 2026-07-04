@@ -11,7 +11,7 @@ export default async function HustleSettingsPage({ params }: { params: Promise<{
   if (!hustle) return null;
 
   return (
-    <div className="p-6 space-y-6 max-w-3xl">
+    <div className="p-6 lg:p-8 space-y-6 max-w-3xl">
       <PageHeader title="Settings" description="Configure this hustle." />
 
       <Card>
